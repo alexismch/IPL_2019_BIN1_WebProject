@@ -1,0 +1,10 @@
+Options +FollowSymlinks
+RewriteEngine on
+
+RewriteRule ^question/([0-9]+)/([a-zA-Z_-]+) index.php?page=question&id=$1&name=$2 [NC,L]
+RewriteRule ^search/([0-9a-zA-Z_-]+) index.php?page=search&key=$1 [NC,L]
+RewriteRule ^category/([a-zA-Z_-]+) index.php?page=category&catname=$1 [NC,L]
+RewriteRule ^user/([0-9a-zA-Z_-]+) index.php?page=user&username=$1
+
+
+#RewriteRule ^contact index.php?page=contact
