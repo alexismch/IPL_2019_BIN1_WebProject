@@ -4,32 +4,39 @@ RewriteEngine on
 RewriteRule ^index index.php [NC,L]
 RewriteRule ^register index.php?page=register [NC,L]
 RewriteRule ^login index.php?page=login [NC,L]
-RewriteRule ^question/([a-zA-Z_-]+) index.php?page=question&action=$1 [NC,L]
-RewriteRule ^question/([0-9]+)/([0-9a-zA-Z_-]+) index.php?page=question&id=$1&name=$2 [NC,L]
+
+# Question view & actions
+RewriteRule ^question/([a-zA-Z_-]+)/([0-9]+) index.php?page=question&action=$1&id=$2 [NC,L]
+RewriteRule ^question/([0-9]+)/([0-9a-zA-Z_-]+) index.php?page=question&action=show&id=$1&name=$2 [NC,L]
+
 RewriteRule ^search/([0-9a-zA-Z_-]+) index.php?page=search&key=$1 [NC,L]
 RewriteRule ^category/([0-9a-zA-Z_-]+) index.php?page=category&catname=$1 [NC,L]
-RewriteRule ^user/([0-9a-zA-Z_-]+) index.php?page=user&username=$1 [NC,L]
 
+# User infos & actions
+RewriteRule ^user/([0-9a-zA-Z_-]+) index.php?page=user&action=show&username=$1 [NC,L]
+RewriteRule ^user/([a-zA-Z_-]+)/([0-9a-zA-Z_-]+) index.php?page=user&action=$1&username=$2 [NC,L]
+
+# Redirect all files to index.php excepted some extensions
 RewriteRule	!\.(js|gif|css|jpg|jpeg|png|map|json)$	index.php  [L]
 
-ErrorDocument 400 /index.php
-ErrorDocument 401 /index.php
-ErrorDocument 402 /index.php
-ErrorDocument 403 /index.php
-ErrorDocument 404 /index.php
-ErrorDocument 405 /index.php
-ErrorDocument 406 /index.php
-ErrorDocument 407 /index.php
-ErrorDocument 408 /index.php
-ErrorDocument 409 /index.php
-ErrorDocument 410 /index.php
-ErrorDocument 411 /index.php
-ErrorDocument 412 /index.php
-ErrorDocument 413 /index.php
-ErrorDocument 414 /index.php
-ErrorDocument 500 /index.php
-ErrorDocument 501 /index.php
-ErrorDocument 502 /index.php
-ErrorDocument 503 /index.php
-ErrorDocument 504 /index.php
-ErrorDocument 505 /index.php
+ErrorDocument 400 /index.php?page=error
+ErrorDocument 401 /index.php?page=error
+ErrorDocument 402 /index.php?page=error
+ErrorDocument 403 /index.php?page=error
+ErrorDocument 404 /index.php?page=error
+ErrorDocument 405 /index.php?page=error
+ErrorDocument 406 /index.php?page=error
+ErrorDocument 407 /index.php?page=error
+ErrorDocument 408 /index.php?page=error
+ErrorDocument 409 /index.php?page=error
+ErrorDocument 410 /index.php?page=error
+ErrorDocument 411 /index.php?page=error
+ErrorDocument 412 /index.php?page=error
+ErrorDocument 413 /index.php?page=error
+ErrorDocument 414 /index.php?page=error
+ErrorDocument 500 /index.php?page=error
+ErrorDocument 501 /index.php?page=error
+ErrorDocument 502 /index.php?page=error
+ErrorDocument 503 /index.php?page=error
+ErrorDocument 504 /index.php?page=error
+ErrorDocument 505 /index.php?page=error

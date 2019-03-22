@@ -1,7 +1,8 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: alexismichiels
-	 * Date: 2019-03-21
-	 * Time: 15:20
+	/*
+	 * Define paths for MVC
 	 */
+	define('PATH_VIEWS', 'views/');
+	define('PATH_CONTROLLERS', 'controllers/');
+	define('PATH_MODELS', 'models/');
+	define('PATH_ASSETS', 'http://'.$_SERVER['HTTP_HOST'].'/'.PATH_VIEWS);
