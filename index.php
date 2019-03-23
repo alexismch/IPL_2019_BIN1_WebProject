@@ -37,3 +37,5 @@
 			require_once (PATH_CONTROLLERS."indexController.php");
 			break;
 	}
+	
+	require_once (PATH_VIEWS."global/footer.php");
