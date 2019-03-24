@@ -1,7 +1,5 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: alexismichiels
-	 * Date: 2019-03-21
-	 * Time: 15:16
-	 */
+	require_once (PATH_VIEWS."heads/indexHead.php");
+
+	require_once (PATH_VIEWS."global/menu.php");
+	
