@@ -1,7 +1,4 @@
-<?php
-	/**
-	 * Created by PhpStorm.
-	 * User: alexismichiels
-	 * Date: 2019-03-21
-	 * Time: 15:32
-	 */
+        <title>Accueil</title>
+        <link rel="stylesheet" type="text/css" href="<?php echo PATH_ASSETS."css/index.css"?>">
+    </head>
+    <body>
