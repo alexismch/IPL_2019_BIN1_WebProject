@@ -172,6 +172,33 @@
     color: #F2F3F3 !important;
 }
 
+.plus-categories {
+    margin-top: 50px;
+    height: 50px;
+    width: 50px;
+    background: #222222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F2F3F3;
+    border: 2px #222222 solid;
+    border-radius: 100%;
+    text-decoration: none;
+    transition: 0.5s ease;
+    font-size: 25px;
+}
+
+.plus-categories:hover {
+    background: #F2F3F3;
+    color: #222222;
+    text-decoration: none;
+}
+
+.plus-categories span {
+    left: 1px !important;
+    top: 0 !important;
+}
+
 .horizontal-separator {
     width: 90%;
     height: 1px;

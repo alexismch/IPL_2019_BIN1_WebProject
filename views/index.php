@@ -25,6 +25,9 @@
             }
         ?>
     </div>
+    <a href="/categories" class="plus-categories">
+        <span class="glyphicon glyphicon-plus"></span>
+    </a>
 </div>
 <div class="horizontal-separator"></div>
 <div id="questions-display">
