@@ -66,4 +66,15 @@
 			$request->execute();
 			return $request->fetchAll();
 		}
+        public function valider_utilisateur($username,$pwd) {
+            $query = 'SELECT mdp from user WHERE username=:username';
+            $ps = $this->_db->prepare($query);
+            $ps->bindValue(':username',$pwd);
+            $ps->execute();
+            if ($ps->rowcount() == 0)
+                return false;
+            $hash = $ps->fetch()->pwd;
+            return password_verify($pwd, $hash);
+        }
+
 	}
