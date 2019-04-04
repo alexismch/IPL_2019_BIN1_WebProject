@@ -10,13 +10,13 @@
 			$ini_array = parse_ini_file(PATH_MODELS."config.ini", true);
 			$config['host'] = $ini_array['db']['host']; // Database host
 			$config['dbname'] = $ini_array['db']['name']; // Database name
-			$config['User.class'] = $ini_array['db']['User.class']; // Database username
+			$config['user'] = $ini_array['db']['user']; // Database username
 			$config['pass'] = $ini_array['db']['passwd']; // Database passwd
 			$pdo_options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 				PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'); // PDO options
 			
 			try {
-				$this->_db = new PDO('mysql:host='.$config['host'].';dbname='.$config['dbname'], $config['User.class'], $config['pass'], $pdo_options); // Create connexion with Database
+				$this->_db = new PDO('mysql:host='.$config['host'].';dbname='.$config['dbname'], $config['user'], $config['pass'], $pdo_options); // Create connexion with Database
 			} catch (Exception $e) {
 				exit('Error : '.$e->getMessage()); // Stop script and show Error
 			}
