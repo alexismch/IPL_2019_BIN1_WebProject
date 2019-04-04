@@ -1,9 +1,9 @@
 <?php
 	class LoginController{
-		private $_db;
+		private $_global;
 		
-	    public function __construct($db) {
-			$this->_db = $db;
+		public function __construct($global) {
+			$this->_global = $global;
 		    require_once (PATH_VIEWS."heads/loginHead.php");
 	    }
 	
@@ -21,7 +21,7 @@
 	        if (empty($_POST)) {
 	            # L'utilisateur doit remplir le formulaire
 	            $notification='Authentifiez-vous';
-	        } elseif (!$this->_db->valider_utilisateur($_POST['username'],$_POST['pwd'])) {
+	        } elseif (!$this->_global['db']->valider_utilisateur($_POST['username'],$_POST['pwd'])) {
 	            # L'authentification n'est pas correcte
 	            $notification='Vos données d\'authentification ne sont pas correctes.';
 	        } else {

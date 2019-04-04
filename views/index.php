@@ -30,12 +30,12 @@
         <?php
             foreach ($randomCategories as $key => $value) {
                 echo '<button class="category">';
-                    echo '<a href="/category/'.str_replace(" ", "-", $categories[$value]['name']).'">'.$categories[$value]['name'].'</a>';
+                    echo '<a href="/category/'.$categories[$value]['category_id'].'/'.$this->_global['fn']->clean($categories[$value]['name']).'">'.$categories[$value]['name'].'</a>';
                 echo '</button>';
             }
         ?>
     </div>
-    <a href="/category/all" class="plus-categories">
+    <a href="/category/0/all" class="plus-categories">
         <span class="glyphicon glyphicon-plus"></span>
     </a>
 </div>
@@ -47,7 +47,7 @@
             foreach ($lastQuestions as $key => $value) {
                 echo '<div class="question">';
                     echo '<div>';
-                        $link = "/question/".$value['question_id']."/".str_replace(' ', '-', $value['title']);
+                        $link = "/question/".$value['question_id']."/".$this->_global['fn']->clean($value['title']);
 	                    echo '<h3><a href="'.$link.'">'.$value['title'].'</a></h3>';
 	                    echo '<span>par <a href="/user/'.$value['username'].'" class="author">'.$value['username'].'</a></span>';
 	                echo '</div>';

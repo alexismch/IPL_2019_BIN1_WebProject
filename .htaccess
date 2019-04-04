@@ -10,7 +10,7 @@ RewriteRule ^question/([a-zA-Z_-]+)/([0-9]+)(/)?$ index.php?page=question&action
 RewriteRule ^question/([0-9]+)/([0-9a-zA-Z_-]+)(/)?$ index.php?page=question&id=$1&name=$2 [NC,L]
 
 RewriteRule ^search(/)?$ index.php?page=search&key=$1 [NC,L]
-RewriteRule ^category/([0-9a-zA-Z_-]+)(/)?$ index.php?page=category&catname=$1 [NC,L]
+RewriteRule ^category/([0-9]+)/([0-9a-zA-Z_-]+)(/)?$ index.php?page=category&catname=$1 [NC,L]
 
 # User.class infos & actions
 RewriteRule ^user/([0-9a-zA-Z_-]+)(/)?$ index.php?page=user&username=$1 [NC,L]

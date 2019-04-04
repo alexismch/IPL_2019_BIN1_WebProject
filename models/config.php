@@ -15,4 +15,5 @@
 	}
 	spl_autoload_register('autoLoadClass');
 	
-	$db = Db::getInstance();
+	$global['db'] = Db::getInstance();
+	$global['fn'] = new GlobalFunctions();

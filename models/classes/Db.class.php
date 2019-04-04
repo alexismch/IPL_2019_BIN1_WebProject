@@ -43,20 +43,24 @@
 				switch ($type) {
 					case "cat":
 						$cat_name = func_get_arg(1);
-						$request = $this->_db->prepare("SELECT q.* FROM class_not_found.questions q, class_not_found.categories c
+						$request = $this->_db->prepare("SELECT q.*
+							FROM class_not_found.questions q, class_not_found.categories c
 							WHERE c.name = :cat_name
 							AND c.category_id = q.category_id
 							ORDER BY q.creation_date DESC");
-						$request->bindValue('cat_name', $cat_name);
+						$request->bindValue('cat_name', $cat_name, PDO::PARAM_STR);
 						break;
 						
-					case "last":
-						$request = $this->_db->prepare("SELECT q.question_id, q.title, q.subject, u.username FROM class_not_found.questions q, class_not_found.users u
+					case "nbr":
+						$nbr = func_get_arg(1);
+						$request = $this->_db->prepare("SELECT q.question_id, q.title, q.subject, u.username
+							FROM class_not_found.questions q, class_not_found.users u
 							WHERE u.user_id = q.user_id
 							ORDER BY q.creation_date DESC
-							LIMIT 3");
+							LIMIT :nbr");
+						$request->bindValue('nbr', $nbr, PDO::PARAM_INT);
 						break;
-					
+						
 					default:
 						return;
 				}
@@ -66,6 +70,7 @@
 			$request->execute();
 			return $request->fetchAll();
 		}
+		
         public function select_user() {
             $query = 'SELECT * FROM user ORDER BY no ASC';
             $ps = $this->_db->prepare($query);
