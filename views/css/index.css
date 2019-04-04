@@ -1,0 +1,238 @@
+.player {
+    height: 100vh;
+    width: 100%;
+    text-align: center !important;
+    overflow: hidden;
+}
+
+.background {
+    height: 100vh;
+    width: 100%;
+    background: url("/views/images/background.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center !important;
+    filter: blur(5px);
+}
+
+.inside-background-div {
+    opacity: 1;
+    z-index: 9998;
+    animation: toShow 3s;
+    transition: opacity 0.5s ease;
+    animation-iteration-count: 1;
+}
+
+@keyframes toShow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.slog {
+    position: absolute;
+    color: #F2F3F3;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slog h1 {
+    margin: 0;
+    color: #F2F3F3;
+    font-size: 40px;
+    text-shadow: black 1px 1px;
+}
+
+.mouse
+{
+    text-align: center;
+    width: 34px;
+    height: 58px;
+    display: inline-block;
+    border-radius: 20px;
+    border: 3px solid #ff8d1c;
+    position: absolute;
+    bottom: 1vh;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.mouse i
+{
+    height: 10px;
+    width: 4px;
+    background: #F2F3F3;
+    display: inline-block;
+    border-radius: 3px;
+    transition: opacity 0.5s;
+    transition-delay: 3s;
+    animation: mouseRoll 3s infinite;
+}
+
+.mouse:hover
+{
+    border-color: #ff841b;
+}
+
+.mouse:hover i
+{
+    background: #ff841b;
+}
+
+@keyframes mouseRoll
+{
+    0%
+    {
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    60%
+    {
+        transform: translateY(10px);
+    }
+    75%
+    {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+#about-display {
+    padding: 50px 5%;
+    background: #222222;
+    color: #F2F3F3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+    box-shadow: #222222 0px 0px 5px;
+}
+
+#about-display p {
+    margin-top: 25px;
+}
+
+#categories-display, #questions-display {
+    padding: 50px 5%;
+    color: #222222;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#categories-display .categories {
+    margin-top: 50px;
+}
+
+#categories-display .categories .category {
+    background: none;
+    border: 2px #222222 solid;
+    height: 50px;
+    width: 200px;
+    transition: 0.5s ease;
+    font-weight: bold;
+    outline: none;
+}
+
+#categories-display .categories .category:nth-child(2) {
+    margin: 0 50px;
+}
+
+#categories-display .categories .category a {
+    color: #222222 !important;
+    transition: 0.5s ease;
+    text-decoration: none;
+}
+
+#categories-display .categories .category:hover {
+    background: #222222;
+    border: 2px #222222 solid;
+    color: #F2F3F3;
+}
+
+#categories-display .categories .category:hover a {
+    color: #F2F3F3 !important;
+}
+
+.separator {
+    width: 90%;
+    height: 1px;
+    background-color: #bfbfbf;
+    margin: 0 5%;
+    margin-top: 50px;
+}
+
+.questions {
+    padding: 0 5%;
+    text-align: justify;
+}
+
+.question:first-child {
+    margin-top: 50px;
+}
+
+.question {
+    border: 2px #222222 solid;
+    padding: 5px 5%;
+    margin-top: 25px;
+}
+
+.question h3 {
+    color: #ff841b;
+}
+
+.question p {
+    position: relative;
+}
+
+.question p span {
+    position: relative;
+    display: inline-block;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 40px;
+    line-height: 20px;
+    text-align:justify;
+}
+
+.question p::after {
+    content: "...";
+    position: absolute;
+    font-size: 20px;
+    right: -15px;
+    bottom: 4px;
+    color: #ff841b;
+    font-weight: bold;
+}
+
+.question div:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.question div:nth-child(1) > span {
+    margin-left: 5px;
+}
+
+.question div:nth-child(1) > span > .author {
+    color: #ff841b;
+}

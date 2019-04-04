@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=0.9, shrink-to-fit=no">
@@ -9,3 +9,4 @@
         <link rel="stylesheet" type="text/css" href="<?php echo PATH_ASSETS; ?>bootstrap/css/bootstrap.min.css">
         <script src="<?php echo PATH_ASSETS; ?>bootstrap/js/jquery.min.js"></script>
         <script src="<?php echo PATH_ASSETS; ?>bootstrap/js/bootstrap.min.js"></script>
+        <link rel="icon" href="<?php echo PATH_ASSETS ?>images/iconeWhite.png">

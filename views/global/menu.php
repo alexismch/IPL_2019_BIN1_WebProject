@@ -1,5 +1,5 @@
 <header>
-    <div class="head">
+    <div class="head-navbar">
         <div class="logo">
             <img src="<?php echo PATH_ASSETS."images/iconeGrey.png" ?>">
             <div class="name">
@@ -8,10 +8,10 @@
         </div>
         <div class="search-box">
             <form id="search-bar" method="get" action="/search" >
-                <button class="submit" type="submit">
+                <button class="submit-search" type="submit">
                     <span class="glyphicon glyphicon-search"></span>
                 </button>
-                <input class="search" type="text" placeholder="Rechercher...">
+                <input name="key" class="search" type="text" placeholder="Rechercher..." autocomplete="off">
             </form>
         </div>
         <button class="account">
@@ -19,15 +19,7 @@
         </button>
     </div>
 
-    <!--<div>
-        <a href="#">Connexion</a> / <a href="#">Inscription</a>
-    </div>
-    <div>
-        <form method="get" action="/search" >
-            <input type="submit" value="Rechercher">
-            <input type="text">
-        </form>
-    </div>
+    <!--
     <nav>
         <ul>
             <li>General</li>
