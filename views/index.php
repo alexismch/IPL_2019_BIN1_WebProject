@@ -6,6 +6,16 @@
         <i></i>
     </a>
     <div class="background"></div>
+    <script>
+        $(document).ready(function() {
+            $("a.scroll").click(function() {
+                event.preventDefault()
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, "slow");
+            });
+        });
+    </script>
 </div>
 
 <div id="about-display">
@@ -25,7 +35,7 @@
             }
         ?>
     </div>
-    <a href="/categories" class="plus-categories">
+    <a href="/category/all" class="plus-categories">
         <span class="glyphicon glyphicon-plus"></span>
     </a>
 </div>

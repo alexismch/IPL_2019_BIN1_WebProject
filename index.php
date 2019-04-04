@@ -3,6 +3,7 @@
 	
 	require_once (PATH_VIEWS."global/head.php");
 	
+	if (!isset($_GET['page'])) $_GET['page'] = "index";
 	switch ($_GET['page']) {
 		case "error" :
 			require_once (PATH_CONTROLLERS."errorController.php");
