@@ -172,7 +172,7 @@
     color: #F2F3F3 !important;
 }
 
-.separator {
+.horizontal-separator {
     width: 90%;
     height: 1px;
     background-color: #bfbfbf;
@@ -195,7 +195,7 @@
     margin-top: 25px;
 }
 
-.question h3 {
+.question h3 a {
     color: #ff841b;
 }
 

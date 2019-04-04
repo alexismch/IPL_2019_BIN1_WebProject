@@ -18,19 +18,4 @@
             <a href="/login">Connexion</a>
         </button>
     </div>
-
-    <!--
-    <nav>
-        <ul>
-            <li>General</li>
-            <li>3D Graph</li>
-            <li>Big Data</li>
-            <li>Algo</li>
-            <li>AI</li>
-            <li>Web</li>
-        </ul>
-    </nav>
-    <div>
-        <button>Ajouter une question</button>
-    </div>-->
 </header>

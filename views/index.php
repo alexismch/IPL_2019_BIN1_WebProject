@@ -26,7 +26,7 @@
         ?>
     </div>
 </div>
-<div class="separator"></div>
+<div class="horizontal-separator"></div>
 <div id="questions-display">
     <h1>Les dernières questions...</h1>
     <div class="questions">
@@ -34,7 +34,8 @@
             foreach ($lastQuestions as $key => $value) {
                 echo '<div class="question">';
                     echo '<div>';
-	                    echo '<h3>'.$value['title'].'</h3>';
+                        $link = "/question/".$value['question_id']."/".str_replace(' ', '-', $value['title']);
+	                    echo '<h3><a href="'.$link.'">'.$value['title'].'</a></h3>';
 	                    echo '<span>par <a href="/user/'.$value['username'].'" class="author">'.$value['username'].'</a></span>';
 	                echo '</div>';
                     echo '<p>';
@@ -44,7 +45,6 @@
                     echo '</p>';
                 echo '</div>';
             }
-            
         ?>
     </div>
 </div>

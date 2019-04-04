@@ -51,7 +51,7 @@
 						break;
 						
 					case "last":
-						$request = $this->_db->prepare("SELECT q.category_id, q.title, q.subject, u.username FROM class_not_found.questions q, class_not_found.users u
+						$request = $this->_db->prepare("SELECT q.question_id, q.title, q.subject, u.username FROM class_not_found.questions q, class_not_found.users u
 							WHERE u.user_id = q.user_id
 							ORDER BY q.creation_date DESC
 							LIMIT 3");
