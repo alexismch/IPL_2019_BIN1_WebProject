@@ -90,6 +90,7 @@
             # var_dump($tableau);
             return $tableau;
         }
+        
         public function valider_utilisateur($username,$pwd) {
             $query = 'SELECT mdp from user WHERE username=:username';
             $ps = $this->_db->prepare($query);
@@ -100,6 +101,7 @@
             $hash = $ps->fetch()->pwd;
             return password_verify($pwd, $hash);
         }
+        
         public function insert_utilisateur($username,$pwd) {
             $query = 'INSERT INTO user (username,pwd) values (:username,:pwd)';
             $ps = $this->_db->prepare($query);
@@ -107,6 +109,7 @@
             $ps->bindValue(':pwd',$pwd);
             return $ps->execute();
         }
+        
         public function username_exist($username) {
             $query = 'SELECT * from user WHERE username=:username';
             $ps = $this->_db->prepare($query);
@@ -114,5 +117,4 @@
             $ps->execute();
             return ($ps->rowcount() != 0);
         }
-
 	}
