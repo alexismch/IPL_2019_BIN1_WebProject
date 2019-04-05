@@ -12,15 +12,8 @@
         <div id="notification"><?php echo $notification; ?></div>
         <div class="formulaire_inscription">
             <form action="?action=login" method="post">
-
                 <p> Nom: <input type="text" name="nom" /></p>
                 <p> prenom: <input type="text" name="prenom" /></p>
-
-
-
-
-
-
                 <p>pseudo : <input type="text" name="nom_dutilisateur" /></p>
                 <p>Mot de passe : <input type="password" name="motdepasse" /></p>
                 <p> Verification du mot de passe: <input type="password" name="motdepasse_verif" /></p>

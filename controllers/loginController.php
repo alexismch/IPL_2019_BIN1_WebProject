@@ -8,7 +8,7 @@
 	    }
 	
 	    public function run(){
-	        # Si un distrait écrit ?action=login en étant déjà authentifié
+
 	        if (!empty($_SESSION['authentifie'])) {
 	            header("Location: index.php?action=admin"); # redirection HTTP vers l'action login
 	            die();
