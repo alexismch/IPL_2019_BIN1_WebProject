@@ -71,6 +71,14 @@
 			return $request->fetchAll();
 		}
 		
+		public function getQuestion($id) {
+			$request = $this->_db->prepare("SELECT q.*, c.name AS category_name FROM class_not_found.questions q, class_not_found.categories c
+					WHERE q.question_id = :id AND c.category_id = q.category_id");
+			$request->bindValue('id', $id, PDO::PARAM_INT);
+			$request->execute();
+			return $request->fetch();
+		}
+		
         public function select_user() {
             $query = 'SELECT * FROM user ORDER BY no ASC';
             $ps = $this->_db->prepare($query);
@@ -82,6 +90,7 @@
             # var_dump($tableau);
             return $tableau;
         }
+        
         public function valider_utilisateur($username,$pwd) {
             $query = 'SELECT mdp from user WHERE username=:username';
             $ps = $this->_db->prepare($query);
@@ -92,5 +101,4 @@
             $hash = $ps->fetch()->pwd;
             return password_verify($pwd, $hash);
         }
-
 	}
