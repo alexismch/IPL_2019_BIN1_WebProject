@@ -6,7 +6,7 @@
 			$this->_global = $global;
 			require_once (PATH_VIEWS."heads/registerHead.php");
 		}
-        public function _run(){
+        public function run(){
             if(empty($_POST)){
                $notification='enregistrer-vous';
             }

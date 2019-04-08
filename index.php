@@ -66,7 +66,11 @@
 	
 	function pageCategory($global) {
 		require_once (PATH_CONTROLLERS."categoryController.php");
-		return new categoryController($global);
+		try {
+			return new categoryController($global);
+		} catch (Error $error) {
+			return pageError($global);
+		}
 	}
 	
 	function pageQuestion($global) {

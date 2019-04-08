@@ -42,13 +42,13 @@
 			if (!empty($type)) {
 				switch ($type) {
 					case "cat":
-						$cat_name = func_get_arg(1);
+						$referer = func_get_arg(1);
 						$request = $this->_db->prepare("SELECT q.*
 							FROM class_not_found.questions q, class_not_found.categories c
-							WHERE c.name = :cat_name
+							WHERE c.link_referer = :referer
 							AND c.category_id = q.category_id
 							ORDER BY q.creation_date DESC");
-						$request->bindValue('cat_name', $cat_name, PDO::PARAM_STR);
+						$request->bindValue('referer', $referer, PDO::PARAM_STR);
 						break;
 						
 					case "nbr":

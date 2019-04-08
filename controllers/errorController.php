@@ -6,4 +6,8 @@
 			$this->_global = $global;
 			require_once (PATH_VIEWS."heads/errorHead.php");
 		}
+		
+		public function run() {
+		
+		}
 	}
