@@ -30,7 +30,7 @@
         <?php
             foreach ($randomCategories as $key => $value) {
                 echo '<button class="category">';
-                    echo '<a href="/category/'.$categories[$value]['category_id'].'/'.$this->_global['fn']->clean($categories[$value]['name']).'">'.$categories[$value]['name'].'</a>';
+                    echo '<a href="/category/'.$this->_global['fn']->clean($categories[$value]['name']).'">'.$categories[$value]['name'].'</a>';
                 echo '</button>';
             }
         ?>

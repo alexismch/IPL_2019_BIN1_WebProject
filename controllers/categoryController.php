@@ -8,7 +8,6 @@
 		}
 		
 		public function run() {
-			echo $_GET['catname'];
-			
+		
 		}
 	}

@@ -72,11 +72,25 @@
 		}
 		
 		public function getQuestion($id) {
-			$request = $this->_db->prepare("SELECT q.*, c.name AS category_name FROM class_not_found.questions q, class_not_found.categories c
-					WHERE q.question_id = :id AND c.category_id = q.category_id");
+			$request = $this->_db->prepare("SELECT q.*, u.username, c.name AS category_name
+					FROM class_not_found.questions q, class_not_found.categories c, class_not_found.users u
+					WHERE q.question_id = :id AND c.category_id = q.category_id AND q.user_id = u.user_id");
 			$request->bindValue('id', $id, PDO::PARAM_INT);
 			$request->execute();
 			return $request->fetch();
+		}
+		
+		public function getAnswers($questionId) {
+			$request = $this->_db->prepare("SELECT SUM(v.value) AS nbrVotes, a.*, u.username
+				FROM class_not_found.votes v, class_not_found.answers a, class_not_found.users u
+				WHERE a.question_id = :questionId
+				AND v.answer_id = a.answer_id
+				AND a.user_id = u.user_id
+				GROUP BY answer_id
+				ORDER BY a.creation_date");
+			$request->bindValue('questionId', $questionId, PDO::PARAM_INT);
+			$request->execute();
+			return $request->fetchAll();
 		}
 		
         public function select_user() {

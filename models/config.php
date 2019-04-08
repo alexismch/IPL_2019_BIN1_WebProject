@@ -2,6 +2,7 @@
 	/*
 	 * Define paths for MVC
 	 */
+	session_start();
 	define('PATH_VIEWS', 'views/');
 	define('PATH_CONTROLLERS', 'controllers/');
 	define('PATH_MODELS', 'models/');

@@ -34,9 +34,11 @@
 			break;
 			
 		case "index" :
-		default :
 			$page = pageIndex($global);
 			break;
+			
+		default :
+			$page = pageError($global);
 	}
 	require_once (PATH_VIEWS."global/menu.php");
 	$page->run();

@@ -2,6 +2,7 @@
 	class questionController {
 		private $_global;
 		private $_question;
+		private $_answers;
 		
 		public function __construct($global) {
 			$this->_global = $global;
@@ -12,6 +13,11 @@
 				header("Location: /question/".$_GET['id']."/".$cleanTitle);
 				exit();
 			}
+			$this->_answers = $this->_global['db']->getAnswers($_GET['id']);
 			require_once (PATH_VIEWS."heads/questionHead.php");
+		}
+		
+		public function run() {
+			require_once (PATH_VIEWS."question.php");
 		}
 	}
