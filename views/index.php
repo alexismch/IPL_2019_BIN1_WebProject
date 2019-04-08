@@ -35,7 +35,7 @@
             }
         ?>
     </div>
-    <a href="/category/0/all" class="plus-categories">
+    <a href="/category/all" class="plus-categories">
         <span class="glyphicon glyphicon-plus"></span>
     </a>
 </div>

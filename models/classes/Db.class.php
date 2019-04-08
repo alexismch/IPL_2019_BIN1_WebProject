@@ -37,6 +37,13 @@
 			return $request->fetchAll();
 		}
 		
+		public function getCategory($referer) {
+			$request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.link_referer = :referer");
+			$request->bindValue('referer', $referer, PDO::PARAM_STR);
+			$request->execute();
+			return $request->fetch();
+		}
+		
 		public function getQuestions() {
 			$type = func_get_arg(0);
 			if (!empty($type)) {
