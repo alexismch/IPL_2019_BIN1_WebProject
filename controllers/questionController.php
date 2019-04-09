@@ -20,6 +20,12 @@
 		}
 		
 		public function run() {
+			$isOwner = false;
+			$correctAnswer = $this->_question['correct_answer_id'];
+			if (isset($_SESSION['user'])) {
+				$user = unserialize($_SESSION['user']);
+				if ($this->_question['username'] === $user->getUsername()) $isOwner = true;
+			}
 			require_once (PATH_VIEWS."question.php");
 		}
 	}

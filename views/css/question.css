@@ -33,6 +33,7 @@
 
 .question p {
     margin-top: 30px;
+    text-align: justify;
 }
 
 .question + .horizontal-separator {
@@ -51,10 +52,19 @@
     justify-content: center;
 }
 
-.answer div:nth-child(1) {
+.answer .content {
+    width: 100%;
+    text-align: justify;
+}
+
+.answer .vote, .answer .mark-correct {
     align-items: center;
     width: 50px;
     font-size: 15px;
+}
+
+.mark-correct {
+    font-size: 20px !important;
 }
 
 .answers .horizontal-separator:last-child {
@@ -65,10 +75,10 @@
     color: #ff841b;
 }
 
-.answer .vote a:hover {
+.answer .vote a:hover, .answer .mark-correct a.owned:hover {
     color: #ff730b;
 }
 
-.answer .vote a.selected {
+a.selected {
     color: green;
 }
