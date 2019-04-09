@@ -55,6 +55,7 @@
 .answer .content {
     width: 100%;
     text-align: justify;
+    padding-right: 10%;
 }
 
 .answer .vote, .answer .mark-correct {
@@ -81,4 +82,39 @@
 
 a.selected {
     color: green;
+}
+
+.no-answer, .add-answer {
+    text-align: center;
+    padding: 0 10%;
+}
+
+.add-answer form div {
+    margin: 25px 0;
+}
+
+#submit-section button {
+    height: 30px;
+    width: 100px;
+    border: 1px #222222 solid;
+    color: #222222;
+    background: none;
+    font-weight: bold;
+    transition: 0.5s ease;
+}
+
+#answer-section textarea {
+    min-width: 80%;
+    max-width: 80%;
+    min-height: 100px;
+    max-height: 150px;
+    outline: none;
+    color: #ff841b;
+    padding: 5px 0 0 5px;
+    border: #bfbfbf 1px solid;
+}
+
+#submit-section button:hover {
+    background: #222222;
+    color: #F2F3F3;
 }

@@ -12,7 +12,9 @@
 </script>
 <div class="answers">
     <?php
-        foreach ($this->_answers as $key => $value) {
+        if (empty($this->_answers)) echo '<div class="no-answer"><h4>Il n\'y a actuellement aucunes réponses...</h4></div>';
+        else
+            foreach ($this->_answers as $key => $value) {
             $isCorrect = $correctAnswer == $value['answer_id'];
             $for = false;
             $against = false;
@@ -36,7 +38,18 @@
                     echo '<p>'.$value['subject'].'</p>';
                 echo '</div>';
             echo '</div>';
-            echo '<div class="horizontal-separator"></div>';
         }
     ?>
+    <div class="horizontal-separator"></div>
+    <div class="add-answer">
+        <h4>Ajoutez une réponse !</h4>
+        <form id="add-answer" method="POST" action="/question/add">
+            <div id="answer-section">
+                <textarea name="answer" placeholder="Soyez clair et précis..."></textarea>
+            </div>
+            <div id="submit-section">
+                <button type="submit" name="add-answer">Ajouter</button>
+            </div>
+        </form>
+    </div>
 </div>

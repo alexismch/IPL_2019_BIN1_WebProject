@@ -16,7 +16,10 @@
         </div>
         <button class="account">
             <?php
-	            if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) echo '<a href="/logout">Déconnexion</a>';
+	            if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+	                $user = unserialize($_SESSION['user']);
+	                echo '<a href="/logout">Déconnexion</a><span class="connected-user">'.$user->getUsername().'</span>';
+	            }
                 else echo '<a href="/login">Connexion</a>';
             ?>
         </button>
