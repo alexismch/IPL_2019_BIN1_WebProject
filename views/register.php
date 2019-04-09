@@ -1,11 +1,3 @@
-
-	/**
-	 * Created by PhpStorm.
-	 * User.class: alexismichiels
-	 * Date: 2019-03-21
-	 * Time: 15:35
-	 */
-
     <section div class="Sing_in">
         <h2>Register</h2>
         <p>Inscription.</p>

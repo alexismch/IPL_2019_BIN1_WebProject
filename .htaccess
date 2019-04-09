@@ -4,12 +4,13 @@ RewriteEngine on
 RewriteRule ^index(/)?$ index.php [NC,L]
 RewriteRule ^register(/)?$ index.php?page=register [NC,L]
 RewriteRule ^login(/)?$ index.php?page=login [NC,L]
+RewriteRule ^logout(/)?$ index.php?page=logout [NC,L]
 
 # Question view & actions
 RewriteRule ^question/([a-zA-Z_-]+)/([0-9]+)(/)?$ index.php?page=question&action=$1&id=$2 [NC,L]
 RewriteRule ^question/([0-9]+)(/)?$ index.php?page=question&id=$1&title=none [NC,L]
 RewriteRule ^question/([0-9]+)/([0-9a-zA-Z_-]+)(/)?$ index.php?page=question&id=$1&title=$2 [NC,L]
-RewriteRule ^answer/([0-9]+)/vote/([a-zA-Z_-]+)(/)?$ index.php?page=vote?answerId=$1&action=$2 [NC,L]
+RewriteRule ^answer/([0-9]+)/vote/([a-zA-Z_-]+)(/)?$ index.php?page=vote&answerId=$1&action=$2 [NC,L]
 
 RewriteRule ^search(/)?$ index.php?page=search&key=$1 [NC,L]
 RewriteRule ^category/([0-9a-zA-Z_-]+)(/)?$ index.php?page=category&referer=$1 [NC,L]

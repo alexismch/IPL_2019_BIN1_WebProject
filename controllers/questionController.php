@@ -3,6 +3,7 @@
 		private $_global;
 		private $_question;
 		private $_answers;
+		private $_answersVoted;
 		
 		public function __construct($global) {
 			$this->_global = $global;
@@ -14,6 +15,7 @@
 				exit();
 			}
 			$this->_answers = $this->_global['db']->getAnswers($_GET['id']);
+			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) $this->_answersVoted = $this->_global['db']->getAnswersVoted($this->_question['question_id']);
 			require_once (PATH_VIEWS."heads/questionHead.php");
 		}
 		

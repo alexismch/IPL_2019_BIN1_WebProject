@@ -4,38 +4,34 @@
 		
 		public function __construct($global) {
 			$this->_global = $global;
-		    require_once (PATH_VIEWS."heads/loginHead.php");
+			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+				$_SESSION['code'] = "E0";
+				header("Location: /");
+				exit();
+			}
+			require_once (PATH_VIEWS."heads/loginHead.php");
 	    }
 	
 	    public function run(){
-
-	        if (!empty($_SESSION['authentifie'])) {
-	            header("Location: index.php?action=admin"); # redirection HTTP vers l'action login
-	            die();
-	        }
-	
-	        # Variables HTML dans la vue
-	        $notification='';
-	
-	        # L'utilisateur s'est-il bien authentifié ?
-	        if (empty($_POST)) {
-	            # L'utilisateur doit remplir le formulaire
-	            $notification='Authentifiez-vous';
-	        } elseif (!$this->_global['db']->valider_utilisateur($_POST['username'],$_POST['pwd'])) {
-	            # L'authentification n'est pas correcte
-	            $notification='Vos données d\'authentification ne sont pas correctes.';
-	        } else {
-	            # L'utilisateur est bien authentifié
-	            # Une variable de session $_SESSION['authenticated'] est créée
-	            $_SESSION['authentifie'] = 'autorise';
-	            $_SESSION['login'] = $_POST['username'];
-	            # Redirection HTTP pour demander la page admin
-	            header("Location: index.php?action=admin");
-	            die();
-	        }
-	
-	
+			if (isset($_POST['login'])) {
+				$user = $this->_global['db']->getUser($_POST['username']);
+				if ($user != null && $user->isValidPasswd($_POST['passwd'])) {
+					if ($user->isLocked()) $errorMessage = "Votre compte est actuellement bloqué...";
+					else {
+						$_SESSION['user'] = serialize($user);
+						$_SESSION['isConnected'] = true;
+						$_SESSION['code'] = "S0";
+						header("Location: ".$_SESSION['referer']);
+					}
+				} else $errorMessage = "Nom d'utilisateur ou mot de passe incorrect...";
+			}
+			if (isset($_GET['error'])) {
+				switch ($_GET['error']) {
+					case 1:
+						$errorMessage = "Vous devez être connecté pour voter...";
+						break;
+				}
+			}
 	        require_once(PATH_VIEWS.'login.php');
 	    }
-	
 	}

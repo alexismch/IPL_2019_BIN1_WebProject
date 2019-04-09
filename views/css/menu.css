@@ -5,9 +5,10 @@ body {
     outline: 0 !important;
     font-family: 'Comfortaa', cursive !important;
     background: #F2F3F3 !important;
+    user-select: none;
 }
 
-body#index-page {
+body#index-page, body#login-page {
     padding-top: 0;
 }
 
@@ -134,4 +135,16 @@ header {
 
 .account:hover a, .account a:hover {
     color: #F2F3F3;
+}
+
+.alert {
+    margin-top: 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+body#index-page .alert, body#login-page .alert {
+    margin-top: 50px;
 }

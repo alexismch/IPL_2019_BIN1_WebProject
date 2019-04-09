@@ -8,11 +8,17 @@
 <div class="answers">
     <?php
         foreach ($this->_answers as $key => $value) {
+            $for = false;
+            $against = false;
+	        if (isset($this->_answersVoted) && isset($this->_answersVoted[$value['answer_id']])) {
+                if ($this->_answersVoted[$value['answer_id']] == 1) $for = true;
+                else $against = true;
+            }
             echo '<div class="answer">';
                 echo '<div class="vote">';
-                    echo '<a href="/answer/'.$value['answer_id'].'/vote/up"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
+                    echo '<a href="/answer/'.$value['answer_id'].'/vote/up"'.(($for) ? ' class="selected"' : '').'><span class="glyphicon glyphicon-thumbs-up"></span></a>';
                     echo '<span>'.$value['nbrVotes'].'</span>';
-                    echo '<a href="/answer/'.$value['answer_id'].'/vote/down"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
+                    echo '<a href="/answer/'.$value['answer_id'].'/vote/down"'.(($against) ? ' class="selected"' : '').'><span class="glyphicon glyphicon-thumbs-down"></span></a>';
                 echo '</div>';
                 echo '<div>';
                     echo '<h4>de <a href="/user/'.$value['username'].'">'.$value['username'].'</a></h4>';

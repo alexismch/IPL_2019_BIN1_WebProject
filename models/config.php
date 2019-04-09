@@ -7,6 +7,16 @@
 	define('PATH_CONTROLLERS', 'controllers/');
 	define('PATH_MODELS', 'models/');
 	define('PATH_ASSETS', 'http://'.$_SERVER['HTTP_HOST'].'/'.PATH_VIEWS);
+	define("HOSTNAME", $_SERVER['HTTP_HOST']);
+	
+	$referer = substr($_SERVER['HTTP_REFERER'], 0, strpos($_SERVER['HTTP_REFERER'], "?"));
+	
+	$_SERVER['HTTP_REFERER'] = (empty($referer)) ? $_SERVER['HTTP_REFERER'] : $referer;
+
+	$statement = "http://".HOSTNAME.(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/");
+	
+	if ($_SERVER['HTTP_REFERER'] === $statement) $_SERVER['HTTP_REFERER'] = "/";
+	else $_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
 	
 	/*
 	 * Autoload classes

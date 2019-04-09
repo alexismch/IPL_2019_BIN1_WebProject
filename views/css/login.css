@@ -1,0 +1,79 @@
+.login {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-section {
+    width: 350px;
+    height: 300px;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.login-form, .form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form {
+    align-items: center;
+    justify-content: space-between;
+    border: 1px #bfbfbf solid;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background: #eceded;
+}
+
+.login-form h2 {
+    margin: 0;
+}
+
+.form-section {
+    width: 100%;
+    align-items: flex-start;
+}
+
+.form-section input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    color: #ff841b;
+    border: 1px #bfbfbf solid;
+    padding-left: 5px;
+    transform: translateY(30px);
+}
+
+.form-section label {
+    transform: translateY(5px) translateX(5px);
+    z-index: 1;
+    color: #ff841b;
+    transition: 0.5s ease;
+}
+
+.form-section input:focus + label, .form-section input:valid + label {
+    transform: translateY(-20px) translateX(0);
+    color: #222222;
+}
+
+.login-form #register-section a {
+    color: #ff841b;
+}
+
+.login-form #submit-section button {
+    border: 1px #222222 solid;
+    height: 35px;
+    width: 100px;
+    color: #222222;
+    font-weight: bold;
+    background: none;
+    transition: 0.5s ease;
+}
+
+.login-form #submit-section button:hover {
+    color: #eceded;
+    background: #222222;
+}

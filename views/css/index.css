@@ -19,7 +19,7 @@
 
 .inside-background-div {
     opacity: 1;
-    z-index: 9998;
+    z-index: 1;
     animation: toShow 3s;
     transition: opacity 0.5s ease;
     animation-iteration-count: 1;

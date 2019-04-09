@@ -88,39 +88,42 @@
 		}
 		
 		public function getAnswers($questionId) {
-			$request = $this->_db->prepare("SELECT SUM(v.value) AS nbrVotes, a.*, u.username
-				FROM class_not_found.votes v, class_not_found.answers a, class_not_found.users u
+			$request = $this->_db->prepare("SELECT DISTINCT a.*, u.username, coalesce(SUM(v.value), 0) AS nbrVotes
+				FROM class_not_found.answers a
+				       JOIN class_not_found.users u ON u.user_id = a.user_id
+				       LEFT JOIN class_not_found.votes v ON v.answer_id = a.answer_id
 				WHERE a.question_id = :questionId
-				AND v.answer_id = a.answer_id
-				AND a.user_id = u.user_id
-				GROUP BY answer_id
-				ORDER BY a.creation_date");
+				GROUP BY a.answer_id");
 			$request->bindValue('questionId', $questionId, PDO::PARAM_INT);
 			$request->execute();
 			return $request->fetchAll();
 		}
 		
-        public function select_user() {
-            $query = 'SELECT * FROM user ORDER BY no ASC';
-            $ps = $this->_db->prepare($query);
-            $ps->execute();
-            $tableau = array();
-            while ($row = $ps->fetch()) {
-                $tableau[] = new User($row->no,$row->username,$row->pwd);
-            }
-            # var_dump($tableau);
-            return $tableau;
-        }
-        
-        public function valider_utilisateur($username,$pwd) {
-            $query = 'SELECT mdp from user WHERE username=:username';
-            $ps = $this->_db->prepare($query);
-            $ps->bindValue(':username',$username);
-            $ps->execute();
-            if ($ps->rowcount() == 0)
-                return false;
-            $hash = $ps->fetch()->pwd;
-            return password_verify($pwd, $hash);
+		public function getAnswersVoted($questionId) {
+			$request = $this->_db->prepare("SELECT  v.answer_id, v.value
+				FROM class_not_found.votes v, class_not_found.answers a
+				WHERE v.answer_id = a.answer_id
+				AND a.question_id = :questionId
+				AND v.user_id = :userId");
+			$request->bindValue("questionId", $questionId, PDO::PARAM_INT);
+			$user = unserialize($_SESSION['user']);
+			$request->bindValue("userId", $user->getId(), PDO::PARAM_INT);
+			$request->execute();
+			$resultTemp = $request->fetchAll();
+			foreach ($resultTemp AS $key => $value) {
+				$result[$value['answer_id']] = $value['value'];
+			}
+			return $result;
+		}
+		
+        public function getUser($username) {
+            $request = $this->_db->prepare("SELECT * FROM class_not_found.users u WHERE u.username = :username");
+            $request->bindValue('username', $username, PDO::PARAM_STR);
+            $request->execute();
+            $user = $request->fetch();
+            if ($user == null) return null;
+            $user = new User($user['user_id'], $user['name'], $user['firstname'], $user['username'], $user['email'], $user['passwd'], $user['isLocked'], $user['isAdmin']);
+            return $user;
         }
         
         public function insert_utilisateur($username,$pwd) {

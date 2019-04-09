@@ -6,4 +6,8 @@
 			$this->_global = $global;
 			require_once (PATH_VIEWS."heads/searchHead.php");
 		}
+		
+		public function run() {
+		
+		}
 	}

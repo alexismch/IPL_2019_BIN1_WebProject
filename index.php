@@ -37,6 +37,18 @@
 			$page = pageIndex($global);
 			break;
 			
+		case "vote" :
+			$page = pageVote($global);
+			break;
+			
+		case "logout" :
+			unset($_SESSION['user']);
+			unset($_SESSION['isConnected']);
+			$_SESSION['code'] = "S1";
+			header("Location: ".$_SESSION['referer']);
+			exit();
+			break;
+			
 		default :
 			$page = pageError($global);
 	}
@@ -95,4 +107,9 @@
 	function pageIndex($global) {
 		require_once (PATH_CONTROLLERS."indexController.php");
 		return new indexController($global);
+	}
+	
+	function pageVote($global) {
+		require_once (PATH_CONTROLLERS."voteController.php");
+		return new voteController($global);
 	}

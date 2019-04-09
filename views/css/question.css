@@ -60,3 +60,15 @@
 .answers .horizontal-separator:last-child {
     display: none;
 }
+
+.answer a {
+    color: #ff841b;
+}
+
+.answer .vote a:hover {
+    color: #ff730b;
+}
+
+.answer .vote a.selected {
+    color: green;
+}

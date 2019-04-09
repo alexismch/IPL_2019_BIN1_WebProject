@@ -1,43 +1,54 @@
 <?php
-/**
- * Created by PhpStorm.
- * User.class: gdecrom18
- * Date: 04-04-19
- * Time: 14:48
- */
+	class User {
+	    private $_id;
+	    private $_name;
+	    private $_firstname;
+	    private $_username;
+	    private $_email;
+	    private $_passwd;
+	    private $_isLocked;
+	    private $_isAdmin;
 
-class User
-{
-    private $_no;
-    private $_username;
-    private $_pwd;
+		public function __construct($_id, $_name, $_firstname, $_username, $_email, $_passwd, $_isLocked, $_isAdmin) {
+			$this->_id = $_id;
+			$this->_name = $_name;
+			$this->_firstname = $_firstname;
+			$this->_username = $_username;
+			$this->_email = $_email;
+			$this->_passwd = $_passwd;
+			$this->_isLocked = $_isLocked;
+			$this->_isAdmin = $_isAdmin;
+		}
+		
+		public function getId() {
+			return $this->_id;
+		}
+		
+		public function getName() {
+			return $this->_name;
+		}
+		
+		public function getFirstname() {
+			return $this->_firstname;
+		}
+		
+		public function getUsername() {
+			return $this->_username;
+		}
+		
+		public function getEmail() {
+			return $this->_email;
+		}
 
-    public function __construct($no,$username,$pwd){
-        $this->_no = $no;
-        $this->_username = $username;
-        $this->_pwd = $pwd;
-    }
-
-    public function no(){
-        return $this->_no;
-    }
-
-    public function username(){
-        return $this->_username;
-    }
-
-    public function pwd(){
-        return $this->_pwd;
-    }
-    public function html_no(){
-        return htmlspecialchars($this->_no);
-    }
-
-    public function html_username(){
-        return htmlspecialchars($this->_username);
-    }
-
-    public function html_pwd(){
-        return htmlspecialchars($this->_pwd);
-    }
-}
+		public function isLocked() {
+			return $this->_isLocked;
+		}
+		
+		public function isAdmin() {
+			return $this->_isAdmin;
+		}
+		
+		public function isValidPasswd($passwd) {
+			return password_verify($passwd, $this->_passwd);
+		}
+	}
