@@ -30,9 +30,9 @@
                         echo '<a ' . $a . '><span class="glyphicon glyphicon-check"></span></a>';
                     echo '</div>';
                     echo '<div class="vote">';
-                        echo '<a href="/answer/vote/' . $value['answer_id'] . '/up"' . (($for) ? ' class="selected" title="Enlever le vote"' : ' title="Voter pour"') . ' data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
+                        echo '<a href="/answer/vote/' . $value['answer_id'] . '/up"' . (($for) ? ' class="for selected" title="Enlever le vote"' : ' title="Voter pour"') . ' data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
                             echo '<span>' . $value['nbrVotes'] . '</span>';
-                        echo '<a href="/answer/vote/' . $value['answer_id'] . '/down"' . (($against) ? ' class="selected" title="Enlever le vote"' : ' title="Voter contre"') . ' data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
+                        echo '<a href="/answer/vote/' . $value['answer_id'] . '/down"' . (($against) ? ' class="against selected" title="Enlever le vote"' : ' title="Voter contre"') . ' data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
                     echo '</div>';
                     echo '<div class="content">';
                         echo '<h4>de <a href="/user/' . $value['username'] . '">' . $value['username'] . '</a></h4>';

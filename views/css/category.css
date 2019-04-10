@@ -1,0 +1,43 @@
+#categories-display, #questions-display {
+    padding: 50px 5%;
+    color: #222222;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#categories-display .categories {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#categories-display .categories .category {
+    background: none;
+    border: 2px #222222 solid;
+    height: 50px;
+    width: 250px;
+    transition: 0.5s ease;
+    font-weight: bold;
+    outline: none;
+    margin: 50px;
+}
+
+#categories-display .categories .category a {
+    color: #222222 !important;
+    transition: 0.5s ease;
+    text-decoration: none;
+}
+
+#categories-display .categories .category:hover {
+    background: #222222;
+    border: 2px #222222 solid;
+    color: #F2F3F3;
+}
+
+#categories-display .categories .category:hover a {
+    color: #F2F3F3 !important;
+}

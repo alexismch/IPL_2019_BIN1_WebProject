@@ -1,7 +1,7 @@
 <header>
     <div class="head-navbar">
         <div class="logo">
-            <img src="<?php echo PATH_ASSETS."images/iconeGrey.png" ?>">
+            <img alt="logo" src="<?php echo PATH_ASSETS."images/iconeGrey.png" ?>">
             <div class="name">
                 <a href="/">ClassNotFound</a>
             </div>
