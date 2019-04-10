@@ -3,6 +3,7 @@
 		private $_global;
 		
 		public function __construct($global) {
+			if (empty($_SESSION['referer'])) $_SESSION['referer'] = "/";
 			$this->_global = $global;
 			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
 				$_SESSION['code'] = "E0";
@@ -21,16 +22,11 @@
 						$_SESSION['user'] = serialize($user);
 						$_SESSION['isConnected'] = true;
 						$_SESSION['code'] = "S0";
-						header("Location: ".$_SESSION['referer']);
+						if (isset($_SESSION['form'])) header("Location: ".$_SESSION['form']['formURL']);
+						else header("Location: ".$_SESSION['referer']);
+						exit();
 					}
 				} else $errorMessage = "Nom d'utilisateur ou mot de passe incorrect...";
-			}
-			if (isset($_GET['error'])) {
-				switch ($_GET['error']) {
-					case 1:
-						$errorMessage = "Vous devez être connecté pour voter...";
-						break;
-				}
 			}
 	        require_once(PATH_VIEWS.'login.php');
 	    }

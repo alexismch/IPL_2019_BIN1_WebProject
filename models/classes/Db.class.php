@@ -157,7 +157,30 @@
 			$request->execute();
         }
         
+        public function addAnswer($questionId, $answer) {
+			if (strlen($answer) < 20) return false;
+			$request = $this->_db->prepare("INSERT INTO class_not_found.answers (creation_date, subject, question_id, user_id)
+					VALUES (NOW(), :answer, :questionId, :userId)");
+			$request->bindValue("answer", htmlspecialchars($answer), PDO::PARAM_STR);
+			$request->bindValue("questionId", $questionId, PDO::PARAM_INT);
+			$user = unserialize($_SESSION['user']);
+			$request->bindValue("userId", $user->getId(), PDO::PARAM_INT);
+			$request->execute();
+			return true;
+        }
         
+        public function voteForAnswer($answerId, $vote) {
+			$request = $this->_db->prepare("INSERT INTO class_not_found.votes (votes.user_id, votes.answer_id, votes.value)
+					VALUES (:userId, :answerId, :vote)
+					ON DUPLICATE KEY UPDATE votes.user_id = :userId, votes.answer_id = :answerId, votes.value = if((
+					  SELECT v.value as value FROM class_not_found.votes v WHERE v.user_id = :userId AND v.answer_id = :answerId) = :vote,
+					  0, :vote)");
+			$user = unserialize($_SESSION['user']);
+			$request->bindValue("userId", $user->getId(), PDO::PARAM_INT);
+			$request->bindValue("answerId", $answerId, PDO::PARAM_INT);
+			$request->bindValue("vote", $vote, PDO::PARAM_INT);
+			$request->execute();
+        }
         
         
         
