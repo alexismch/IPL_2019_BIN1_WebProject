@@ -126,6 +126,41 @@
             return $user;
         }
         
+        public function getOwnerByAnswer($answerId) {
+			$request = $this->_db->prepare("SELECT u.username FROM class_not_found.users u, class_not_found.questions q, class_not_found.answers a
+					WHERE a.answer_id = :answerId
+					AND q.question_id = a.question_id
+					AND u.user_id = q.user_id");
+			$request->bindValue("answerId", $answerId, PDO::PARAM_INT);
+			$request->execute();
+			return $request->fetch()['username'];
+        }
+        
+        public function getQuestionByAnswer($answerId) {
+	        $request = $this->_db->prepare("SELECT q.question_id FROM class_not_found.questions q, class_not_found.answers a
+					WHERE a.answer_id = :answerId
+					AND q.question_id = a.question_id");
+	        $request->bindValue("answerId", $answerId, PDO::PARAM_INT);
+	        $request->execute();
+	        return $request->fetch()['question_id'];
+        }
+        
+        public function markCorrectAnswer($answerId) {
+			$questionId = $this->getQuestionByAnswer($answerId);
+			$request = $this->_db->prepare("UPDATE class_not_found.questions q, (SELECT q.correct_answer_id AS id
+                                     FROM class_not_found.questions q
+                                     WHERE q.question_id = :questionId) AS correctAnswer
+					SET q.correct_answer_id = IF(correctAnswer.id IS NULL, :correctAnswer, IF(correctAnswer.id <> :correctAnswer, :correctAnswer, null))
+					WHERE q.question_id = :questionId");
+			$request->bindValue("questionId", $questionId, PDO::PARAM_INT);
+			$request->bindValue("correctAnswer", $answerId, PDO::PARAM_INT);
+			$request->execute();
+        }
+        
+        
+        
+        
+        
         public function insert_utilisateur($username,$pwd) {
             $query = 'INSERT INTO user (username,pwd) values (:username,:pwd)';
             $ps = $this->_db->prepare($query);

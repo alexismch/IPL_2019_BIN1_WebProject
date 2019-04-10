@@ -37,8 +37,8 @@
 			$page = pageIndex($global);
 			break;
 			
-		case "vote" :
-			$page = pageVote($global);
+		case "answer" :
+			$page = pageAnswer($global);
 			break;
 			
 		case "logout" :
@@ -109,7 +109,7 @@
 		return new indexController($global);
 	}
 	
-	function pageVote($global) {
-		require_once (PATH_CONTROLLERS."voteController.php");
-		return new voteController($global);
+	function pageAnswer($global) {
+		require_once(PATH_CONTROLLERS . "answerController.php");
+		return new answerController($global);
 	}

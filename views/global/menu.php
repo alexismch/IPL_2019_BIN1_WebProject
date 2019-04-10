@@ -27,45 +27,18 @@
 </header>
 <?php
 	if (isset($_SESSION['code'])) {
-        switch (substr($_SESSION['code'], 0, 1)) {
-            case "S":
-                $strongMessage = "Succès";
-                $class = "alert-success";
-                switch (substr($_SESSION['code'], 1, 1)) {
-                    case "0":
-	                    $message = "Vous vous êtes bien connecté...";
-	                    break;
-	                    
-                    case "1":
-	                    $message = "Vous vous êtes bien déconnecté...";
-	                    break;
-                    
-                    case "2":
-	                    $message = "Vous vous êtes bien inscrit...";
-	                    break;
-	                    
-                    default:
-                        $message = "Tout s'est bien passé...";
-                }
-	            break;
-            
-            case "E":
-                $strongMessage = "Attention";
-                $class = "alert-danger";
-                switch (substr($_SESSION['code'], 1, 1)) {
-                    case "0":
-	                    $message = "Vous étiez déjà connecté...";
-	                    break;
-	                    
-                    case "1":
-                        $message = "Vous devez être connecté pour pouvoir voter...";
-                        break;
-	                    
-                    default:
-                        $message = "Une erreur est survenue...";
-                }
-                break;
+		$code_array = parse_ini_file(PATH_MODELS."code.ini", true);
+		$codeType = substr($_SESSION['code'], 0, 1);
+		$code = substr($_SESSION['code'], 1, 2);
+		$message = $code_array[$codeType][$code];
+		if ($codeType === "S") {
+		    $strongMessage = "Succès";
+			$class = "alert-success";
+		} else if ($codeType === "E") {
+			$strongMessage = "Attention";
+			$class = "alert-danger";
         }
+		
 		echo '<div class="alert '.$class.' alert-dismissible fade in">';
 		    echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
 		    echo '<strong>'.$strongMessage.'!</strong> '.$message;
