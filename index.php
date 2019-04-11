@@ -6,7 +6,7 @@
 	if (!isset($_GET['page'])) $_GET['page'] = "index";
 	switch ($_GET['page']) {
 		case "error" :
-			$page = pageError($global);
+			$page = pageError($global, $_SERVER['REDIRECT_STATUS']);
 			break;
 		
 		case "login" :
@@ -50,7 +50,7 @@
 			break;
 			
 		default :
-			$page = pageError($global);
+			$page = pageError($global, $_SERVER['REDIRECT_STATUS']);
 	}
 	require_once (PATH_VIEWS."global/menu.php");
 	$page->run();
@@ -61,9 +61,9 @@
 	  #############################
 	 # Functions to create pages #
 	#############################
-	function pageError($global) {
+	function pageError($global, $code) {
 		require_once (PATH_CONTROLLERS."errorController.php");
-		return new errorController($global);
+		return new errorController($global, $code);
 	}
 	
 	function pageLogin($global) {
@@ -81,7 +81,7 @@
 		try {
 			return new categoryController($global);
 		} catch (Error $error) {
-			return pageError($global);
+			return pageError($global, $error->getMessage());
 		}
 	}
 	
@@ -90,7 +90,7 @@
 		try {
 			return new questionController($global);
 		} catch (Error $error) {
-			return pageError($global);
+			return pageError($global, $error->getMessage());
 		}
 	}
 	

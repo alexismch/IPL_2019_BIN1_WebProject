@@ -17,6 +17,7 @@
 	
 	if ($_SERVER['HTTP_REFERER'] === $statement) $_SERVER['HTTP_REFERER'] = "/";
 	else $_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
+	if (empty($_SESSION['referer'])) $_SESSION['referer'] = "/";
 	
 	/*
 	 * Autoload classes
