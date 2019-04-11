@@ -50,10 +50,11 @@
 				switch ($type) {
 					case "cat":
 						$referer = func_get_arg(1);
-						$request = $this->_db->prepare("SELECT q.*
-							FROM class_not_found.questions q, class_not_found.categories c
+						$request = $this->_db->prepare("SELECT q.question_id, q.title, q.subject, u.username
+							FROM class_not_found.questions q, class_not_found.categories c, class_not_found.users u
 							WHERE c.link_referer = :referer
 							AND c.category_id = q.category_id
+							AND u.user_id = q.user_id
 							ORDER BY q.creation_date DESC");
 						$request->bindValue('referer', $referer, PDO::PARAM_STR);
 						break;

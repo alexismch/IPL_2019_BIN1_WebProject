@@ -21,11 +21,13 @@
 			switch ($this->_category['name']) {
 				case "Toutes":
 					$categories = $this->_global['db']->getCategories();
-					require_once (PATH_VIEWS."allCategories.php");
+					require_once (PATH_VIEWS."categories.php");
 					break;
 					
 				default:
 					$questions = $this->_global['db']->getQuestions("cat", $this->_category['link_referer']);
+					require_once (PATH_VIEWS."category.php");
+					break;
 			}
 		}
 	}
