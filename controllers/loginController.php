@@ -3,7 +3,6 @@
 		private $_global;
 		
 		public function __construct($global) {
-			if (empty($_SESSION['referer'])) $_SESSION['referer'] = "/";
 			$this->_global = $global;
 			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
 				$_SESSION['code'] = "E0";

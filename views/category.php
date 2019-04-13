@@ -1,4 +1,3 @@
-
 <div id="questions-display">
 	<h1>Les questions de la catégorie : <?php echo $this->_category['name']?></h1>
 	<div class="questions">

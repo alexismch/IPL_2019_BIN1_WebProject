@@ -42,6 +42,7 @@
 			break;
 			
 		case "logout" :
+			unset($_SESSION['form']);
 			unset($_SESSION['user']);
 			unset($_SESSION['isConnected']);
 			$_SESSION['code'] = "S1";
@@ -62,6 +63,7 @@
 	 # Functions to create pages #
 	#############################
 	function pageError($global, $code) {
+		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."errorController.php");
 		return new errorController($global, $code);
 	}
@@ -77,6 +79,7 @@
 	}
 	
 	function pageCategory($global) {
+		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."categoryController.php");
 		try {
 			return new categoryController($global);
@@ -86,6 +89,7 @@
 	}
 	
 	function pageQuestion($global) {
+		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."questionController.php");
 		try {
 			return new questionController($global);
@@ -95,21 +99,25 @@
 	}
 	
 	function pageSearch($global) {
+		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."searchController.php");
 		return new searchController($global);
 	}
 	
 	function pageUser($global) {
+		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."userController.php");
 		return new userController($global);
 	}
 	
 	function pageIndex($global) {
+		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."indexController.php");
 		return new indexController($global);
 	}
 	
 	function pageAnswer($global) {
+		unset($_SESSION['form']);
 		require_once(PATH_CONTROLLERS . "answerController.php");
 		return new answerController($global);
 	}
