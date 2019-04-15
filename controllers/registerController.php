@@ -7,6 +7,7 @@
 			require_once (PATH_VIEWS."heads/registerHead.php");
 		}
         public function run(){
+		    $notification='';
             if(empty($_POST)){
                $notification='enregistrer-vous';
             }
@@ -27,6 +28,14 @@
             }
             elseif(empty($_POST(['mail']))){
                 $notification='introduisez un mail';
+            }
+            else {
+                if ($this->_global->insert_utilisateur($_POST['nom'],$_POST['prenom'],$_POST['email'],$_POST['nom_dutilisateur'],$_POST['motdepass']))
+                {
+                    $notification='Ajout bien fait';
+                } else {
+                    $notification='Erreur à l\'ajout';
+                }
             }
 
 

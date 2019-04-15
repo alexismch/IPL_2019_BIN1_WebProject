@@ -184,16 +184,21 @@
         
         
         
-        public function insert_utilisateur($username,$pwd) {
-            $query = 'INSERT INTO user (username,pwd) values (:username,:pwd)';
+        public function insert_utilisateur($name,$firstname,$email,$username,$pwd) {
+            $query = 'INSERT INTO users ( name,firstame,username,email,passwd) values (:name,:firstname,:username,:email,:pwd)';
             $ps = $this->_db->prepare($query);
+            $ps->bindValue(':name',$name);
+            $ps->bindValue(':firstname',$firstname);
+
             $ps->bindValue(':username',$username);
+            $ps->bindValue(':email',$email);
             $ps->bindValue(':pwd',$pwd);
+
             return $ps->execute();
         }
         
         public function username_exist($username) {
-            $query = 'SELECT * from user WHERE username=:username';
+            $query = 'SELECT * from users WHERE username=:username';
             $ps = $this->_db->prepare($query);
             $ps->bindValue(':username',$username);
             $ps->execute();
