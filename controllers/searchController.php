@@ -8,6 +8,10 @@
 		}
 		
 		public function run() {
-		
+            if(!empty($_GET(['submit-search']))){
+
+            }
+
+            require_once (PATH_VIEWS.'search.php');
 		}
 	}
