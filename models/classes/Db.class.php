@@ -77,7 +77,18 @@
 			$request->execute();
 			return $request->fetchAll();
 		}
-		
+
+        #public function getQuestionsSearch($keyWord){#find all the question who contain the keyWord
+         #   $request= $this->_db->prepare("SELECT q.*
+		#					FROM class_not_found.questions q
+		#					WHERE c.link_referer = :referer
+		#					AND q.title LIKE ('% $keyWord %')
+		#					ORDER BY q.creation_date DESC");
+         #   $request->bindValue('',,PDO::PARAM_INT);
+          #  $request->execute();
+           # return $request->fetchAll();
+        #}
+
 		public function getQuestion($id) {
 			$request = $this->_db->prepare("SELECT q.*, u.username, c.name AS category_name
 					FROM class_not_found.questions q, class_not_found.categories c, class_not_found.users u
@@ -86,6 +97,7 @@
 			$request->execute();
 			return $request->fetch();
 		}
+
 		
 		public function getAnswers($questionId) {
 			$request = $this->_db->prepare("SELECT DISTINCT a.*, u.username, coalesce(SUM(v.value), 0) AS nbrVotes
@@ -185,7 +197,7 @@
         
         
         public function insert_utilisateur($name,$firstname,$email,$username,$pwd) {
-            $query = 'INSERT INTO users ( name,firstame,username,email,passwd) values (:name,:firstname,:username,:email,:pwd)';
+            $query = 'INSERT INTO class_not_found.users ( users.name,users.firstame,users.username,users.email,users.passwd,users.isLocked,users.isAdmin) values (:user_id,:name,:firstname,:username,:email,:pwd,0,0)';
             $ps = $this->_db->prepare($query);
             $ps->bindValue(':name',$name);
             $ps->bindValue(':firstname',$firstname);
@@ -193,7 +205,8 @@
             $ps->bindValue(':username',$username);
             $ps->bindValue(':email',$email);
             $ps->bindValue(':pwd',$pwd);
-
+           # $ps->bindValue('',$pwd);
+            #$ps->bindValue(':pwd',$pwd);
             return $ps->execute();
         }
         
