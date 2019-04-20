@@ -51,4 +51,5 @@
 		public function isValidPasswd($passwd) {
 			return password_verify($passwd, $this->_passwd);
 		}
+
 	}
