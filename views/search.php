@@ -1,5 +1,7 @@
 <div class="search">
-    <h1 class="title">Résultat: <?php echo $_keyWord?></h1>
+    <h1 class="title">Résultat: <?php echo $notification?></h1>
+
+
     <?php
 
         foreach ($_questions as $i => $question){
@@ -10,18 +12,4 @@
 
 
     ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>

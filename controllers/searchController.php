@@ -3,6 +3,7 @@
 		private $_global;
         private $_keyWord;
 		private $_questions;
+		private $notificacation;
 		public function __construct($global) {
 			$this->_global = $global;
 
@@ -15,7 +16,14 @@
 		
 		public function run() {
 
+            if(empty($this->_keyWord)){
+                $notification='vous n\'avez pas faits de recherche';
+            }
+            else{
+                $notification=$_GET['key'];
+            }
 
             require_once (PATH_VIEWS.'search.php');
 		}
 	}
+	?>
