@@ -8,7 +8,6 @@
 	    private $_passwd;
 	    private $_isLocked;
 	    private $_isAdmin;
-        public static $_nbMembre=3;
 		public function __construct($_id, $_name, $_firstname, $_username, $_email, $_passwd, $_isLocked, $_isAdmin) {
 			$this->_id = $_id;
 			$this->_name = $_name;
