@@ -4,7 +4,7 @@
     <?php
 
     foreach ($this->_questions as $i => $question){
-            echo'<a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '">' . $question['title'] . '</a>';#changer le cleantitle///
+            echo'<a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '">' . $question['title'] . '</a></br>';#changer le cleantitle///
 
         }
 

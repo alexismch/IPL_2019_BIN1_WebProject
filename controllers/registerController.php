@@ -31,7 +31,7 @@
                 } elseif (empty($_POST['mail'])) {
                     $notification = 'introduisez un mail';
                 } else {
-                    if ($this->_global['db']->insertUtilisateur($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['nom_dutilisateur'], $_POST['motdepasse'])) {
+                    if ($this->_global['db']->insert_utilisateur($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['nom_dutilisateur'], $_POST['motdepasse'])) {
                         $notification = 'inscription validé';
                     } else {
                         $notification = 'l \'inscription n \' a pas pus ce faire';
