@@ -197,7 +197,7 @@
         
         
         
-        public function insertUtilisateur($name,$firstname,$email,$username,$pwd) {
+        public function insert_utilisateur($name,$firstname,$email,$username,$pwd) {
             $query = 'INSERT INTO class_not_found.users (users.name,users.firstame,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)';
             $ps = $this->_db->prepare($query);
             $ps->bindValue(':name',$name);
@@ -206,7 +206,6 @@
             $ps->bindValue(':username',$username);
             $ps->bindValue(':email',$email);
             $ps->bindValue(':pwd',$pwd);
-            $ps->execute();
             return true;
         }
         

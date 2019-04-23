@@ -9,6 +9,7 @@
 	define('PATH_ASSETS', 'http://'.$_SERVER['HTTP_HOST'].'/'.PATH_VIEWS);
 	define("HOSTNAME", $_SERVER['HTTP_HOST']);
 	
+	if (!isset($_SERVER['HTTP_REFERER'])) $_SERVER['HTTP_REFERER'] = "/";
 	$referer = substr($_SERVER['HTTP_REFERER'], 0, strpos($_SERVER['HTTP_REFERER'], "?"));
 	
 	$_SERVER['HTTP_REFERER'] = (empty($referer)) ? $_SERVER['HTTP_REFERER'] : $referer;

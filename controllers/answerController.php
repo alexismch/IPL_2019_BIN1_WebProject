@@ -79,6 +79,7 @@
 					break;
 					
 				case "vote":
+					if (isset($_SESSION['form'])) echo "ok";
 					$error = false;
 					$user = unserialize($_SESSION['user']);
 					if (isset($_SESSION['form'])) {

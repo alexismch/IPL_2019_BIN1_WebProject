@@ -58,7 +58,6 @@
 	
 	require_once (PATH_VIEWS."global/footer.php");
 	
-	
 	  #############################
 	 # Functions to create pages #
 	#############################
@@ -117,7 +116,6 @@
 	}
 	
 	function pageAnswer($global) {
-		unset($_SESSION['form']);
 		require_once(PATH_CONTROLLERS . "answerController.php");
 		return new answerController($global);
 	}

@@ -172,7 +172,7 @@
     color: #F2F3F3 !important;
 }
 
-.plus-categories {
+.plus-categories, .plus-categories:visited,  .plus-categories:focus {
     margin-top: 50px;
     height: 50px;
     width: 50px;
