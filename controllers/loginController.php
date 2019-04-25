@@ -21,6 +21,13 @@
 						$_SESSION['user'] = serialize($user);
 						$_SESSION['isConnected'] = true;
 						$_SESSION['code'] = "S0";
+						if ($user->isAdmin()==1){
+						    $_SESSION['isAdmin']=true;
+                        }
+                        else{
+                            $_SESSION['isAdmin']=false;
+                        }
+
 						if (isset($_SESSION['form'])) header("Location: ".$_SESSION['form']['formURL']);
 						else header("Location: ".$_SESSION['referer']);
 						exit();
