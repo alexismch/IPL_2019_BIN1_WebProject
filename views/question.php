@@ -31,7 +31,9 @@
                     echo '</div>';
                     echo '<div class="vote">';
                         echo '<a href="/answer/vote/' . $value['answer_id'] . '/up"' . (($for) ? ' class="for selected" title="Enlever le vote"' : ' title="Voter pour"') . ' data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
-                            echo '<span>' . $value['nbrVotes'] . '</span>';
+                            echo '<span class="nbVotesF">' . $value['nbrVotesF'] . '</span>';
+		                    echo '<div class="horizontal-separator-mini"></div>';
+		                    echo '<span>' . $value['nbrVotesA'] . '</span>';
                         echo '<a href="/answer/vote/' . $value['answer_id'] . '/down"' . (($against) ? ' class="against selected" title="Enlever le vote"' : ' title="Voter contre"') . ' data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
                     echo '</div>';
                     echo '<div class="content">';

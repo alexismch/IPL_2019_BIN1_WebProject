@@ -110,12 +110,13 @@
 
 		
 		public function getAnswers($questionId) {
-			$request = $this->_db->prepare("SELECT DISTINCT a.*, u.username, coalesce(SUM(v.value), 0) AS nbrVotes
-				FROM class_not_found.answers a
-				       JOIN class_not_found.users u ON u.user_id = a.user_id
-				       LEFT JOIN class_not_found.votes v ON v.answer_id = a.answer_id
-				WHERE a.question_id = :questionId
-				GROUP BY a.answer_id");
+			$request = $this->_db->prepare("SELECT DISTINCT a.*, u.username, coalesce(COUNT(vF.value), 0) AS nbrVotesF, coalesce(COUNT(vA.value), 0) AS nbrVotesA
+					FROM class_not_found.answers a
+					         JOIN class_not_found.users u ON u.user_id = a.user_id
+					         LEFT JOIN class_not_found.votes vF ON vF.answer_id = a.answer_id AND vF.value > 0
+					         LEFT JOIN class_not_found.votes vA ON vA.answer_id = a.answer_id AND vA.value < 0
+					WHERE a.question_id = :questionId
+					GROUP BY a.answer_id");
 			$request->bindValue('questionId', $questionId, PDO::PARAM_INT);
 			$request->execute();
 			return $request->fetchAll();

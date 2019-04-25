@@ -12,10 +12,10 @@ RewriteRule ^question/([0-9]+)(/)?$ index.php?page=question&id=$1&title=none [NC
 RewriteRule ^question/([0-9]+)/([0-9a-zA-Z_-]+)(/)?$ index.php?page=question&id=$1&title=$2 [NC,L]
 RewriteRule ^answer/([a-zA-Z_-]+)/([0-9]+)(/)?([a-zA-Z_-]+)?(/)?$ index.php?page=answer&action=$1&id=$2&type=$4 [NC,L]
 
-RewriteCond %{QUERY_STRING} key=([0-9a-zA-Z_-]+) [NC]
+RewriteCond %{QUERY_STRING} key=(.+)$ [NC]
 RewriteRule (.*) /search/%1? [R=302,L]
 
-RewriteRule ^search/([0-9a-zA-Z_-]+)(/)?$ index.php?page=search&value=$1 [NC,L]
+RewriteRule ^search/(.+)$(/)?$ index.php?page=search&value=$1 [NC,L]
 RewriteRule ^category/([0-9a-zA-Z_-]+)(/)?$ index.php?page=category&referer=$1 [NC,L]
 
 # User.class infos & actions

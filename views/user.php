@@ -1,5 +1,5 @@
 <div class=" user">
-    <h2>fiche de: <?php echo $this->_user->getName() ?> <?php echo $this->_user->getFirstName() ?> la plus belle personne</h2>
+    <h2>fiche de: <?php echo $this->_user->getName() ?> <?php echo $this->_user->getFirstName() ?></h2>
 
     <p>
         <?php

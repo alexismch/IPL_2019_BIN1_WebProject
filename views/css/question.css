@@ -24,11 +24,17 @@
     color: #ff841b;
 }
 
-.horizontal-separator {
+.horizontal-separator, .horizontal-separator-mini {
     width: 80%;
     height: 1px;
     background-color: #bfbfbf;
     margin: 25px 10%;
+}
+
+.horizontal-separator-mini {
+    margin: 5px 0;
+    width: 50%;
+    background-color: #ff841b;
 }
 
 .question p {
