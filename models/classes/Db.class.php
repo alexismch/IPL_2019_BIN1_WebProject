@@ -82,7 +82,7 @@
         public function getQuestionsSearch($keyWord){#find all the question who contain the keyWord
             $request= $this->_db->prepare("SELECT q.*
 							FROM class_not_found.questions q
-							WHERE q.title LIKE '% $keyWord %'
+							WHERE q.title LIKE '%$keyWord%'
 	  					ORDER BY q.creation_date DESC");
 
 
@@ -199,14 +199,15 @@
         
         
         public function insert_utilisateur($name,$firstname,$email,$username,$pwd) {
-            $query = 'INSERT INTO class_not_found.users (users.name,users.firstame,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)';
+            $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)           ";
             $ps = $this->_db->prepare($query);
             $ps->bindValue(':name',$name);
             $ps->bindValue(':firstname',$firstname);
 
             $ps->bindValue(':username',$username);
             $ps->bindValue(':email',$email);
-            $ps->bindValue(':pwd',$pwd);
+            $ps->bindValue(':pwd',password_hash($pwd, PASSWORD_BCRYPT));
+            $ps->execute();
             return true;
         }
         
