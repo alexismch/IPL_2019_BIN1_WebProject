@@ -128,3 +128,11 @@ a.against.selected {
     background: #222222;
     color: #F2F3F3;
 }
+
+.modify-question, .modify-question:visited, .modify-question:focus {
+    color: #ff841b;
+}
+
+.modify-question:hover {
+    color: #ff730b;
+}

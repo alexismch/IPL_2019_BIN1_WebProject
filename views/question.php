@@ -1,5 +1,46 @@
 <div class="question">
+    <?php
+        if ($isOwner) {
+            ?>
+                <div class="modal fade" id="myModal" role="dialog" style="transform: translateY(25%)">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modifier la question</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="/update/question/<?php echo $this->_question['question_id']?>">
+                                    <div>
+                                        <input name="title" value="<?php echo $this->_question['title']?>">
+                                    </div>
+                                    <div>
+                                    
+                                    </div>
+                                    <div>
+                                        <textarea name="subject"><?php echo $this->_question['subject']?></textarea>
+                                    </div>
+                                    <div>
+                                        <button type="submit">Modifier</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+	        <?php
+        }
+    ?>
     <h1 class="title"><?php echo $this->_question['title']?></h1>
+    <?php
+        if ($isOwner) {
+	        echo '<a data-toggle="modal" data-target="#myModal" class="modify-question"><span data-toggle="tooltip" title="Modifier la question" class="glyphicon glyphicon-cog" data-placement="right"></span></a>';
+        }
+    ?>
     <h4 class="author">par <a href="/user/<?php echo $this->_question['username']?>"><?php echo $this->_question['username']?></a>... le <?php echo $this->_question['creation_date'] ?></h4>
     <button class="category"><a href="/category/<?php echo $this->_global['fn']->clean($this->_question['category_name'])?>"><?php echo $this->_question['category_name']?></a></button>
     <p><?php echo $this->_question['subject']?></p>
