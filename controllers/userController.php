@@ -23,6 +23,21 @@
 		}
 		
 		public function run() {
+
+            $notification='';
+
+
+            if(isset($_SESSION['isConnected']) && $_SESSION['isConnected']&&$_SESSION['isAdmin'] &&!empty($_POST['suspendre'])){
+                if($this->_global['db']->isLocked($this->_user->getId())) {
+                    $notification = "vous avez suspendu ce compte";
+                }
+
+
+            }
+            else{
+                $notification="vous n'avez pas le droit de suspendre";
+            }
+
             require_once (PATH_VIEWS."user.php");
 		}
 	}

@@ -219,6 +219,13 @@
             $ps->execute();
             return true;
         }
+        public function isLocked($id){
+		    $query="UPDATE users SET isLocked=1 WHERE user_id= $id ";
+		    $ps=$this->_db->prepare($query);
+		    $ps->execute();
+		    return true;
+
+        }
         
         public function username_exist($username) {
             $query = 'SELECT * from users WHERE username=:username';
