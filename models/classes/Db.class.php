@@ -89,7 +89,16 @@
             $request->execute();
             return $request->fetchAll();
         }
+        public function getQuestionsUser($userID){
+            $request= $this->_db->prepare("SELECT q.*
+							FROM class_not_found.questions q
+							WHERE q.user_id=$userID
+	  					ORDER BY q.creation_date DESC");
 
+
+            $request->execute();
+            return $request->fetchAll();
+        }
 		public function getQuestion($id) {
 			$request = $this->_db->prepare("SELECT q.*, u.username, c.name AS category_name
 					FROM class_not_found.questions q, class_not_found.categories c, class_not_found.users u
