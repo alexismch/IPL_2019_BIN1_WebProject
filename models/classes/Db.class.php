@@ -206,8 +206,6 @@
 			$request->execute();
         }
         
-        
-        
         public function insertUser($name, $firstname, $email, $username, $pwd) {
             $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)";
             $ps = $this->_db->prepare($query);
@@ -235,6 +233,7 @@
 		    return true;
 
         }
+        
         public function isAdmin($id){
             $query="UPDATE users SET isAdmin=1 WHERE user_id= $id ";
 
@@ -243,6 +242,7 @@
             return true;
 
         }
+        
         public function getAllUsers(){
             $query='SELECT u.username from users u ORDER BY u.username DESC ';
             $ps=$this->_db->prepare($query);

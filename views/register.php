@@ -10,16 +10,16 @@
     <div class="register-section">
         <form class="register-form" action="/register" method="POST">
             <h2>S'inscrire</h2>
-            <div class="form-section" id="lastname-section">
-                <input type="text" name="name" id="lastname" autocomplete="off" required>
-                <label for="lastname">Nom</label>
+            <div class="form-section" id="name-section">
+                <input type="text" name="name" id="name" autocomplete="off" required <?php if (isset($_POST['name'])) echo 'value ="'.$_POST['name'].'"';?>>
+                <label for="name">Nom</label>
             </div>
             <div class="form-section" id="firstname-section">
-                <input type="text" name="firstname" id="firstname" autocomplete="off" required>
+                <input type="text" name="firstname" id="firstname" autocomplete="off" required <?php if (isset($_POST['firstname'])) echo 'value ="'.$_POST['firstname'].'"';?>>
                 <label for="firstname">Prénom</label>
             </div>
             <div class="form-section" id="username-section">
-                <input type="text" name="username" id="username" autocomplete="off" required>
+                <input type="text" name="username" id="username" autocomplete="off" required <?php if (isset($_POST['username'])) echo 'value ="'.$_POST['username'].'"';?>>
                 <label for="username">Nom d'utilisateur</label>
             </div>
             <div class="form-section" id="passwd-section">
@@ -31,7 +31,7 @@
                 <label for="passwd-verify">Verif. mot de passe</label>
             </div>
             <div class="form-section" id="mail-section">
-                <input type="mail" name="mail" id="mail" autocomplete="off" required>
+                <input type="text" name="mail" id="mail" autocomplete="off" required <?php if (isset($_POST['mail'])) echo 'value ="'.$_POST['mail'].'"';?>>
                 <label for="mail">Adresse mail</label>
             </div>
             <div id="submit-section">

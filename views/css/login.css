@@ -13,6 +13,17 @@
     overflow: hidden;
 }
 
+@media screen and (max-height: 375px) {
+    .login {
+        height: auto;
+        padding: 60px 0 10px 0;
+    }
+
+    .login-section {
+        margin-top: 0;
+    }
+}
+
 .login-form, .form-section {
     display: flex;
     flex-direction: column;

@@ -6,6 +6,13 @@
     align-items: center;
 }
 
+@media screen and (max-height: 670px) {
+    .register {
+        height: auto;
+        padding: 60px 0 10px 0;
+    }
+}
+
 .register-section {
     width: 350px;
     height: 600px;
