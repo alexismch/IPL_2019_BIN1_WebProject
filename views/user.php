@@ -4,7 +4,7 @@
     <p>
         <?php
             foreach($this->_questions as $i =>$question){
-                echo'<a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '">' . $question['title'] . '</a></br>';
+                echo'<a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '"><h3>' . $question['title'] . '</h3></a></br>';
             }
 
         ?>
@@ -12,10 +12,16 @@
     <?php if($_SESSION['isAdmin']){?>
     <form action="?action=suspendre" method="post">
         <input type="hidden" id="suspendre" name="suspendre" value="Suspendre">
-        <input type="submit" value="send">
+        <input type="submit" value="suspendre">
     </form>
-    <p><?php echo $notification; ?></p>
 <?php }?>
+    <?php if($_SESSION['isAdmin']){?>
+        <form action="?action=Admin" method="post">
+            <input type="hidden" id="admin" name="Admin" value="admin">
+            <input type="submit" value="   Admin    ">
+
+        </form>
+    <?php }?>
 
 
 

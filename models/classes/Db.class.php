@@ -229,12 +229,28 @@
         
         public function isLocked($id){
 		    $query="UPDATE users SET isLocked=1 WHERE user_id= $id ";
+
 		    $ps=$this->_db->prepare($query);
 		    $ps->execute();
 		    return true;
 
         }
-        
+        public function isAdmin($id){
+            $query="UPDATE users SET isAdmin=1 WHERE user_id= $id ";
+
+            $ps=$this->_db->prepare($query);
+            $ps->execute();
+            return true;
+
+        }
+        public function getAllUsers(){
+            $query='SELECT u.username from users u ORDER BY u.username DESC ';
+            $ps=$this->_db->prepare($query);
+            $ps->execute();
+            return true;
+
+        }
+
         public function username_exist($username) {
             $query = 'SELECT * from users WHERE username=:username';
             $ps = $this->_db->prepare($query);
