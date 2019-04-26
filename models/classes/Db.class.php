@@ -89,6 +89,7 @@
             $request->execute();
             return $request->fetchAll();
         }
+        
         public function getQuestionsUser($userID){
             $request= $this->_db->prepare("SELECT q.*
 							FROM class_not_found.questions q
@@ -99,6 +100,7 @@
             $request->execute();
             return $request->fetchAll();
         }
+        
 		public function getQuestion($id) {
 			$request = $this->_db->prepare("SELECT q.*, u.username, c.name AS category_name
 					FROM class_not_found.questions q, class_not_found.categories c, class_not_found.users u
@@ -107,7 +109,6 @@
 			$request->execute();
 			return $request->fetch();
 		}
-
 		
 		public function getAnswers($questionId) {
 			$request = $this->_db->prepare("SELECT DISTINCT a.*, u.username, coalesce(COUNT(vF.value), 0) AS nbrVotesF, coalesce(COUNT(vA.value), 0) AS nbrVotesA
@@ -207,18 +208,25 @@
         
         
         
-        public function insert_utilisateur($name,$firstname,$email,$username,$pwd) {
-            $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)           ";
+        public function insertUser($name, $firstname, $email, $username, $pwd) {
+            $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)";
             $ps = $this->_db->prepare($query);
-            $ps->bindValue(':name',$name);
-            $ps->bindValue(':firstname',$firstname);
-
-            $ps->bindValue(':username',$username);
-            $ps->bindValue(':email',$email);
-            $ps->bindValue(':pwd',password_hash($pwd, PASSWORD_BCRYPT));
-            $ps->execute();
+            $ps->bindValue('name', $name);
+            $ps->bindValue('firstname', $firstname);
+            $ps->bindValue('username', $username);
+            $ps->bindValue('email', $email);
+            $ps->bindValue('pwd', password_hash($pwd, PASSWORD_BCRYPT));
+            try {
+	            $ps->execute();
+            } catch (PDOException $error) {
+            	$msg = $error->getMessage();
+            	if (strpos($msg, 'username')) return "Nom d'utilisateur déjà utilisé...";
+	            else if (strpos($msg, 'email')) return "Adresse mail déjà utilisée...";
+	            else return "Une erreur est survenue...";
+            }
             return true;
         }
+        
         public function isLocked($id){
 		    $query="UPDATE users SET isLocked=1 WHERE user_id= $id ";
 		    $ps=$this->_db->prepare($query);

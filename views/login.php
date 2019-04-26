@@ -15,7 +15,7 @@
                 <label for="username">Nom d'utilisateur</label>
             </div>
             <div class="form-section" id="passwd-section">
-                <input type="password" name="passwd" id="passwd" required>
+                <input type="password" name="passwd" id="passwd" autocomplete="off" required>
                 <label for="passwd">Mot de passe</label>
             </div>
             <div id="submit-section">
