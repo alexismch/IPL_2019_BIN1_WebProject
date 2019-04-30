@@ -48,6 +48,10 @@
 			return $this->_isAdmin;
 		}
 		
+		public function toggleAdmin() {
+			$this->_isAdmin = !$this->_isAdmin;
+		}
+		
 		public function isValidPasswd($passwd) {
 			return password_verify($passwd, $this->_passwd);
 		}
