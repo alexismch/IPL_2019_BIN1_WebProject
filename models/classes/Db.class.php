@@ -225,8 +225,8 @@
             return true;
         }
         
-        public function isLocked($id){
-		    $query="UPDATE users SET isLocked=1 WHERE user_id= $id ";
+        public function setLocked($id,$state){
+		    $query="UPDATE users SET isLocked=$state WHERE user_id= $id ";
 
 		    $ps=$this->_db->prepare($query);
 		    $ps->execute();
@@ -234,8 +234,8 @@
 
         }
         
-        public function isAdmin($id){
-            $query="UPDATE users SET isAdmin=1 WHERE user_id= $id ";
+        public function setAdmin($id,$state){
+            $query="UPDATE users SET isAdmin=$state WHERE user_id= $id ";
 
             $ps=$this->_db->prepare($query);
             $ps->execute();
@@ -243,11 +243,12 @@
 
         }
         
-        public function getAllUsers(){
-            $query='SELECT u.username from users u ORDER BY u.username DESC ';
+        public function getAllUsersName(){
+            $query='SELECT u.username from class_not_found.users u ORDER BY u.username DESC ';
             $ps=$this->_db->prepare($query);
             $ps->execute();
-            return true;
+
+            return $ps;
 
         }
 
