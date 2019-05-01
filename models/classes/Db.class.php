@@ -244,7 +244,7 @@
         }
         
         public function getAllUsersName(){
-            $query='SELECT u.username from class_not_found.users u ORDER BY u.username DESC ';
+            $query='SELECT u.* from class_not_found.users u ORDER BY u.username ASC ';
             $ps=$this->_db->prepare($query);
             $ps->execute();
 
