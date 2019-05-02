@@ -179,14 +179,14 @@
 			$request->bindValue("questionId", $questionId, PDO::PARAM_INT);
 			$request->bindValue("correctAnswer", $answerId, PDO::PARAM_INT);
 			$request->execute();
-			$this->changeStateQuestionOf($answerId);
+			$this->autoChangeStateQuestionOf($answerId);
         }
 		
-		public function changeStateQuestionOf($answerId) {
+		public function autoChangeStateQuestionOf($answerId) {
 			$request = $this->_db->prepare("UPDATE class_not_found.questions q, (SELECT a.question_id
 					                                    FROM class_not_found.answers a
 					                                    WHERE a.answer_id = :answerId) AS questionId
-					SET q.state = IF(q.correct_answer_id IS NULL, 'o', 's')
+					SET q.state = IF(q.state = 'd', 'd', IF(q.correct_answer_id IS NULL, 'o', 's'))
 					WHERE q.question_id = questionId.question_id");
 			$request->bindValue('answerId', $answerId, PDO::PARAM_INT);
 			$request->execute();
