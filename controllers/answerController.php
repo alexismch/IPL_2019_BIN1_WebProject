@@ -48,6 +48,12 @@
 						exit();
 					}
 					break;
+					
+				default:
+					$_SESSION['code'] = "E8";
+					$loc = isset($_SESSION['form']) ? $_SESSION['form']['referer'] : $_SESSION['referer'];
+					header("Location: ".$loc);
+					exit();
 			}
 		}
 		
@@ -79,7 +85,6 @@
 					break;
 					
 				case "vote":
-					if (isset($_SESSION['form'])) echo "ok";
 					$error = false;
 					$user = unserialize($_SESSION['user']);
 					if (isset($_SESSION['form'])) {

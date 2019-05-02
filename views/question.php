@@ -1,57 +1,57 @@
 <div class="question">
-    <?php if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']){?>
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Duplicate">Dupliquer</button>
-    <div class="modal fade" id="Duplicate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="duplicate_Question">Dupliquer la question</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="duplicate-form" action="?action=duplicate" method="POST">
-                        <div class="form-section" id="url-section">
-                            <label for="url">L'url:</label>
-                            <input type="url" name="url" id="url" >
-                            <input type="submit" class="Dubliquer"/>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">supprimer</button>
-
-    <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="Delete_Question">supprimer la question</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form class="duplicate-form" action="?action=delete" method="POST">
-                        <div class="form-section" id="supprimer-section">
-                            <input type="hidden" id="Delete" name="Delete" value="Delete">
-                            <input type="submit" value="supprimer"/>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-<?php } ?>
-
-
     <?php
+        if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']) {
+            ?>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Duplicate">Dupliquer</button>
+                <div class="modal fade" id="Duplicate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="duplicate_Question">Dupliquer la question</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="duplicate-form" action="?action=duplicate" method="POST">
+                                    <div class="form-section" id="url-section">
+                                        <label for="url">L'url:</label>
+                                        <input type="url" name="url" id="url" >
+                                        <input type="submit" class="Dubliquer"/>
+                                    </div>
+                                </form>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">supprimer</button>
+            
+                <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="Delete_Question">supprimer la question</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="duplicate-form" action="?action=delete" method="POST">
+                                    <div class="form-section" id="supprimer-section">
+                                        <input type="hidden" id="Delete" name="Delete" value="Delete">
+                                        <input type="submit" value="supprimer"/>
+                                    </div>
+                                </form>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            <?php
+        }
+
         if ($isOwner) {
             ?>
                 <div class="modal fade" id="myModal" role="dialog" style="transform: translateY(25%)">
@@ -140,15 +140,25 @@
         }
     ?>
     <div class="add-answer">
-        <h4>Ajoutez une réponse !</h4>
-        <form id="add-answer" method="POST" action="/answer/add/<?php echo $this->_question['question_id']?>">
-            <input type="hidden" name="questionId" value="<?php echo $this->_question['question_id']?>">
-            <div id="answer-section">
-                <textarea name="answer" placeholder="Soyez clair et précis..." minlength="20" required></textarea>
-            </div>
-            <div id="submit-section">
-                <button type="submit" name="add-answer" value="/answer/add/<?php echo $this->_question['question_id']?>">Ajouter</button>
-            </div>
-        </form>
+        <?php
+            if ($this->_question['state'] === 'd') {
+                ?>
+                    <h4>Vous ne pouvez rajouter une réponse à une question dupliquée !</h4>
+	            <?php
+            } else {
+                ?>
+                <h4>Ajoutez une réponse !</h4>
+                <form id="add-answer" method="POST" action="/answer/add/<?php echo $this->_question['question_id']?>">
+                    <input type="hidden" name="questionId" value="<?php echo $this->_question['question_id']?>">
+                    <div id="answer-section">
+                        <textarea name="answer" placeholder="Soyez clair et précis..." minlength="20" required></textarea>
+                    </div>
+                    <div id="submit-section">
+                        <button type="submit" name="add-answer" value="/answer/add/<?php echo $this->_question['question_id']?>">Ajouter</button>
+                    </div>
+                </form>
+                <?php
+            }
+        ?>
     </div>
 </div>
