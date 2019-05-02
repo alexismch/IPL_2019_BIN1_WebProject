@@ -191,6 +191,13 @@
 			$request->bindValue('answerId', $answerId, PDO::PARAM_INT);
 			$request->execute();
 		}
+		
+		public function changeStateQuestion($questionId, $state) {
+			$request = $this->_db->prepare("UPDATE class_not_found.questions q SET q.state = :state WHERE q.question_id = :questionId");
+			$request->bindValue('state', $state, PDO::PARAM_STR_CHAR);
+			$request->bindValue('questionId', $questionId, PDO::PARAM_INT);
+			$request->execute();
+		}
         
         public function addAnswer($questionId, $answer) {
 			if (strlen($answer) < 20) return false;
