@@ -206,6 +206,10 @@
 			$request->execute();
         }
         
+        public function markQuestionAs($id, $state) {
+			
+        }
+        
         public function insertUser($name, $firstname, $email, $username, $pwd) {
             $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)";
             $ps = $this->_db->prepare($query);

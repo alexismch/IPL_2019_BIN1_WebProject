@@ -42,6 +42,7 @@
         }
     ?>
     <h4 class="author">par <a href="/user/<?php echo $this->_question['username']?>"><?php echo $this->_question['username']?></a>... le <?php echo $this->_question['creation_date'] ?></h4>
+    <button class="state <?php echo ($this->_question['state'] === 'o') ? 'open': 'closed'?>"><?php $code_array = parse_ini_file(PATH_MODELS."code.ini", true); echo $code_array['Q'][$this->_question['state']]?></button>
     <button class="category"><a href="/category/<?php echo $this->_global['fn']->clean($this->_question['category_name'])?>"><?php echo $this->_question['category_name']?></a></button>
     <p><?php echo $this->_question['subject']?></p>
 </div>
