@@ -43,7 +43,7 @@
     <?php if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']){?>
 
 
-        <form action="?action=allUser" method="post">
+        <form action="?action=allUser" method="POST">
             <input type="hidden" id="allUsers" name="allUsers" value="allUsers">
             <input type="submit" class="btn btn-secondary" value="   Afficher tous les utilisateurs    ">
         </form>

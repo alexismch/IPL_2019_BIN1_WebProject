@@ -48,7 +48,7 @@
                 $referer_question_id=$_POST['url'];
                 $referer_question_id=mb_ereg_replace("[^0-9]",'',$referer_question_id) ;
                 if(!is_bool($referer_question_id)&&$this->_global['db']->setDuplicated($_GET['id'],$referer_question_id)){
-                    $this->_global['db']->changeStateQuestionOf();
+                    $this->_global['db']->changeStateQuestion($_GET['id'],'d');
                     $_SESSION['code'] = "S11";
                     header("Location: /question/".$_GET['id']."/");
                 }
