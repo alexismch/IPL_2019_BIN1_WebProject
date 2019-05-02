@@ -4,11 +4,10 @@
 		private $_code;
 		private $_message;
 		
-		public function __construct($global, $code) {
-			$code_array = parse_ini_file(PATH_MODELS."code.ini", true);
+		public function __construct($global, $msg, $code) {
 			$this->_global = $global;
 			$this->_code = $code;
-			$this->_message = $code_array[$code];
+			$this->_message = $msg;
 			require_once (PATH_VIEWS."heads/errorhead.php");
 		}
 		

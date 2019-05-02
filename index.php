@@ -6,7 +6,8 @@
 	if (!isset($_GET['page'])) $_GET['page'] = "index";
 	switch ($_GET['page']) {
 		case "error" :
-			$page = pageError($global, $_SERVER['REDIRECT_STATUS']);
+			$code_array = parse_ini_file(PATH_MODELS."code.ini", true);
+			$page = pageError($global, $code_array[$_SERVER['REDIRECT_STATUS']], $_SERVER['REDIRECT_STATUS']);
 			break;
 		
 		case "login" :
@@ -61,10 +62,10 @@
 	  #############################
 	 # Functions to create pages #
 	#############################
-	function pageError($global, $code) {
+	function pageError($global, $msg, $code) {
 		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."errorController.php");
-		return new errorController($global, $code);
+		return new errorController($global, $msg, $code);
 	}
 	
 	function pageLogin($global) {
@@ -83,7 +84,7 @@
 		try {
 			return new categoryController($global);
 		} catch (Error $error) {
-			return pageError($global, $error->getMessage());
+			return pageError($global, "Catégorie inexistante...", $error->getMessage());
 		}
 	}
 	
@@ -93,7 +94,7 @@
 		try {
 			return new questionController($global);
 		} catch (Error $error) {
-			return pageError($global, $error->getMessage());
+			return pageError($global, "Question inexistante...", $error->getMessage());
 		}
 	}
 	
@@ -106,7 +107,11 @@
 	function pageUser($global) {
 		unset($_SESSION['form']);
 		require_once (PATH_CONTROLLERS."userController.php");
-		return new userController($global);
+		try {
+			return new userController($global);
+		} catch (Error $error) {
+			return pageError($global, "Utilisateur inexistant...", $error->getMessage());
+		}
 	}
 	
 	function pageIndex($global) {
