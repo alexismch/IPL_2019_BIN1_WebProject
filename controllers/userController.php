@@ -21,9 +21,6 @@
                     throw new Error("404");
 
                 }
-
-
-
             }
 			else{
                  header('Location:/user');
@@ -77,7 +74,7 @@
 
 
             }
-            
+
 
 
 

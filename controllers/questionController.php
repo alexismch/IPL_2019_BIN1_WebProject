@@ -22,10 +22,34 @@
 		public function run() {
 			$isOwner = false;
 			$correctAnswer = $this->_question['correct_answer_id'];
+
 			if (isset($_SESSION['user'])) {
 				$user = unserialize($_SESSION['user']);
 				if ($this->_question['username'] === $user->getUsername()) $isOwner = true;
 			}
+
+			if(!empty($_POST['Delete'])&&$this->_global['db']->deleteAnswers($_GET['id'])){
+			    echo'test1';
+			    if($this->_global['db']->deleteQuestion($_GET['id'])) {
+
+                        echo 'ok';
+
+
+                }
+            }
+
+            if(!empty($_POST['url'])){
+
+                $referer_question_id=$_POST['url'];
+                $referer_question_id=mb_ereg_replace("[^0-9]",'',$referer_question_id) ;
+                if(!is_bool($referer_question_id)&&$this->_global['db']->setDuplicated($_GET['id'],$referer_question_id)){
+
+                    $_SESSION['code'] = "S11";
+                    header("Location: /question/".$_GET['id']."/");
+                }
+
+            }
+
 			require_once (PATH_VIEWS."question.php");
 		}
 	}

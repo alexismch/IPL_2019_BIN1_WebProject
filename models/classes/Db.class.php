@@ -210,6 +210,50 @@
 			
         }
         
+
+        public function setDuplicated($question_id, $referer_question_id){
+
+            $request=("UPDATE questions SET referer_question_id=$referer_question_id WHERE question_id= $question_id");
+            $ps=$this->_db->prepare($request);
+            $ps->execute();
+
+		    return true;
+        }
+
+
+        public function deleteVotes($question_id){
+            $query=("DELETE FROM votes WHERE votes.answer_id=$question_id");
+            $ps=$this->_db->prepare($query);
+            $ps->execute();
+            return true;
+
+        }
+
+
+
+
+
+        public function deleteAnswers($question_id){
+            $query=("DELETE FROM answers WHERE answers.question_id=$question_id");
+            $ps=$this->_db->prepare($query);
+            $ps->execute();
+            return true;
+        }
+        public function deleteQuestion($question_id){
+		    $request=("DELETE FROM questions WHERE questions.question_id=$question_id");
+
+
+		    $ps=$this->_db->prepare($request);
+
+
+		    $ps->execute();
+
+		    return true;
+
+
+        }
+
+
         public function insertUser($name, $firstname, $email, $username, $pwd) {
             $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)";
             $ps = $this->_db->prepare($query);
