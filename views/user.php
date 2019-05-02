@@ -27,7 +27,7 @@
         </form>
     <?php }?>
 
-    <h2>fiche de: <?php echo $this->_user->getName(); ?> <?php echo $this->_user->getFirstName(); ?></h2>
+    <h2>fiche de: <?php echo $this->_user->getUsername(); ?></h2>
 
     <p>
         <?php

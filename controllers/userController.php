@@ -36,7 +36,7 @@
 		public function run() {
 
             if(!empty($_POST['allUsers'])){
-                $this->_allUsers=$this->_global['db']->getAllUsersName();
+                $this->_allUsers=$this->_global['db']->getAllUsers();
                require_once (PATH_VIEWS."users.php");
                exit();
 

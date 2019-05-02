@@ -232,10 +232,17 @@
         }
         
         public function deleteVotes($question_id){
-            $query=("DELETE FROM votes WHERE votes.answer_id=$question_id");
+            $query=("DELETE FROM votes  WHERE votes.answer_id IN (SELECT answer_id FROM answers WHERE question_id=$question_id)");
             $ps=$this->_db->prepare($query);
             $ps->execute();
             return true;
+        }
+        public  function setCorrectAnswer($question_id){
+		    $query="UPDATE questions SET correct_answer_id=null ";
+		    $ps=$this->_db->prepare($query);
+		    $ps->execute();
+
+		    return true;
         }
         
         public function deleteAnswers($question_id){
@@ -287,8 +294,8 @@
             return true;
         }
         
-        public function getAllUsersName(){
-            $query='SELECT u.username from class_not_found.users u ORDER BY u.username DESC ';
+        public function getAllUsers(){
+            $query='SELECT u.* from class_not_found.users u ORDER BY u.username ASC ';
             $ps=$this->_db->prepare($query);
             $ps->execute();
             return $ps;
