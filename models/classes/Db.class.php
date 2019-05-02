@@ -179,7 +179,18 @@
 			$request->bindValue("questionId", $questionId, PDO::PARAM_INT);
 			$request->bindValue("correctAnswer", $answerId, PDO::PARAM_INT);
 			$request->execute();
+			$this->changeStateQuestionOf($answerId);
         }
+		
+		public function changeStateQuestionOf($answerId) {
+			$request = $this->_db->prepare("UPDATE class_not_found.questions q, (SELECT a.question_id
+					                                    FROM class_not_found.answers a
+					                                    WHERE a.answer_id = :answerId) AS questionId
+					SET q.state = IF(q.correct_answer_id IS NULL, 'o', 's')
+					WHERE q.question_id = questionId.question_id");
+			$request->bindValue('answerId', $answerId, PDO::PARAM_INT);
+			$request->execute();
+		}
         
         public function addAnswer($questionId, $answer) {
 			if (strlen($answer) < 20) return false;
@@ -204,10 +215,6 @@
 			$request->bindValue("answerId", $answerId, PDO::PARAM_INT);
 			$request->bindValue("vote", $vote, PDO::PARAM_INT);
 			$request->execute();
-        }
-        
-        public function markQuestionAs($id, $state) {
-			
         }
 
         public function setDuplicated($question_id, $referer_question_id){
@@ -237,8 +244,7 @@
 		    $ps->execute();
 		    return true;
         }
-
-
+        
         public function insertUser($name, $firstname, $email, $username, $pwd) {
             $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)";
             $ps = $this->_db->prepare($query);
