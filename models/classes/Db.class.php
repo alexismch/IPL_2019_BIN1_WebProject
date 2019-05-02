@@ -209,48 +209,33 @@
         public function markQuestionAs($id, $state) {
 			
         }
-        
 
         public function setDuplicated($question_id, $referer_question_id){
-
             $request=("UPDATE questions SET referer_question_id=$referer_question_id WHERE question_id= $question_id");
             $ps=$this->_db->prepare($request);
             $ps->execute();
-
 		    return true;
         }
-
-
+        
         public function deleteVotes($question_id){
             $query=("DELETE FROM votes WHERE votes.answer_id=$question_id");
             $ps=$this->_db->prepare($query);
             $ps->execute();
             return true;
-
         }
-
-
-
-
-
+        
         public function deleteAnswers($question_id){
             $query=("DELETE FROM answers WHERE answers.question_id=$question_id");
             $ps=$this->_db->prepare($query);
             $ps->execute();
             return true;
         }
+        
         public function deleteQuestion($question_id){
 		    $request=("DELETE FROM questions WHERE questions.question_id=$question_id");
-
-
 		    $ps=$this->_db->prepare($request);
-
-
 		    $ps->execute();
-
 		    return true;
-
-
         }
 
 
@@ -279,7 +264,6 @@
 		    $ps=$this->_db->prepare($query);
 		    $ps->execute();
 		    return true;
-
         }
         
         public function setAdmin($id,$state){
@@ -288,16 +272,13 @@
             $ps=$this->_db->prepare($query);
             $ps->execute();
             return true;
-
         }
         
         public function getAllUsersName(){
             $query='SELECT u.username from class_not_found.users u ORDER BY u.username DESC ';
             $ps=$this->_db->prepare($query);
             $ps->execute();
-
             return $ps;
-
         }
 
         public function username_exist($username) {
