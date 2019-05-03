@@ -112,7 +112,7 @@ header {
     top: -1px;
 }
 
-.account {
+.account, .ask {
     height: 40px;
     width: 120px;
     background: none;
@@ -126,23 +126,31 @@ header {
     justify-content: center;
 }
 
-.account .connected-user {
+.account .connected-user, .ask .ask-question {
     font-size: 10px;
 }
 
-.account a, .account a:focus, .account a:active, .account a:visited {
+.account a, .account a:focus, .account a:active, .account a:visited, .ask a, .ask a:focus, .ask:active, .ask:visited {
     font-weight: bold;
     color: #222222;
     text-decoration: none !important;
     transition: 0.5s ease;
 }
 
-.account:hover {
+.account:hover, .ask:hover {
     background: #222222;
 }
 
-.account:hover a, .account a:hover, .account:hover {
+.account:hover a, .account a:hover, .account:hover, .ask:hover a, .ask a:hover, .ask:hover {
     color: #F2F3F3;
+}
+
+.menu-buttons {
+    display: flex;
+}
+
+.menu-buttons button:first-child {
+    margin-right: 15px;
 }
 
 .alert {

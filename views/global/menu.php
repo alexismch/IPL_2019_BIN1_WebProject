@@ -14,15 +14,20 @@
                 <input name="key" class="search" type="text" placeholder="Rechercher..." autocomplete="off" required>
             </form>
         </div>
-        <button class="account">
-            <?php
-	            if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
-	                $user = unserialize($_SESSION['user']);
-	                echo '<a href="/logout">Déconnexion</a><span class="connected-user">'.$user->getUsername().'</span>';
-	            }
-                else echo '<a href="/login">Connexion</a>';
-            ?>
-        </button>
+        <div class="menu-buttons">
+            <button class="account">
+		        <?php
+			        if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+				        $user = unserialize($_SESSION['user']);
+				        echo '<a href="/logout">Déconnexion</a><span class="connected-user">'.$user->getUsername().'</span>';
+			        }
+			        else echo '<a href="/login">Connexion</a>';
+		        ?>
+            </button>
+            <button class="ask">
+                <a href="/question/add">Poser</a><span class="ask-question">une question</span>
+            </button>
+        </div>
     </div>
 </header>
 <?php

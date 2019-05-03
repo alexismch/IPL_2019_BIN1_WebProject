@@ -7,6 +7,7 @@ RewriteRule ^login(/)?$ index.php?page=login [NC,L]
 RewriteRule ^logout(/)?$ index.php?page=logout [NC,L]
 
 # Question view & actions
+RewriteRule ^question/add(/)?$ index.php?page=question&action=add [NC,L]
 RewriteRule ^question/([a-zA-Z_-]+)/([0-9]+)(/)?$ index.php?page=question&action=$1&id=$2 [NC,L]
 RewriteRule ^question/([0-9]+)(/)?$ index.php?page=question&id=$1&title=none [NC,L]
 RewriteRule ^question/([0-9]+)/([0-9a-zA-Z_-]+)(/)?$ index.php?page=question&id=$1&title=$2 [NC,L]

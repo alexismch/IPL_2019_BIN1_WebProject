@@ -13,7 +13,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form class="duplicate-form" action="?action=duplicate" method="POST">
+                                <form class="duplicate-form" action="" method="POST">
                                     <div class="form-section" id="url-section">
                                         <label for="url">L'url:</label>
                                         <input type="url" name="url" id="url" >
@@ -38,7 +38,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form class="duplicate-form" action="?action=delete" method="POST">
+                                <form class="duplicate-form" action="" method="POST">
                                     <div class="form-section" id="supprimer-section">
                                         <input type="hidden" id="Delete" name="Delete" value="Delete">
                                         <input type="submit" value="supprimer"/>
