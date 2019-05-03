@@ -16,8 +16,8 @@
                                 <form class="duplicate-form" action="" method="POST">
                                     <div class="form-section" id="url-section">
                                         <label for="Question_id">Identifiant de la question:</label>
-                                        <input type="number" min="0"  name="Question_id" id="Question_id" >
-                                        <input type="submit" class="Dubliquer"/>
+                                        <input type="number" min="0"  name="refererId" id="Question_id" >
+                                        <input type="submit" name="delete" class="Dubliquer"/>
                                     </div>
                                 </form>
                             </div>
@@ -26,8 +26,7 @@
                     </div>
                 </div>
             
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">supprimer</button>
-            
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">Supprimer</button>
                 <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -40,8 +39,7 @@
                             <div class="modal-body">
                                 <form class="duplicate-form" action="" method="POST">
                                     <div class="form-section" id="supprimer-section">
-                                        <input type="hidden" id="Delete" name="Delete" value="Delete">
-                                        <input type="submit" value="supprimer"/>
+                                        <input type="submit" name="delete" value="supprimer"/>
                                     </div>
                                 </form>
                             </div>

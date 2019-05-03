@@ -6,10 +6,24 @@
 		private $_answersVoted;
 		
 		public function __construct($global) {
-			if (isset($_GET['action']) && $_GET['action'] === "add") {
+			$this->_global = $global;
+
+			if (isset($_POST['delete'])) {
+				$refererId = $_POST['refererId'];
+				if ($this->_global['db']->setDuplicated($_GET['id'], $refererId)) {
+					$_SESSION['code'] = "S11";
+					header("Location: ".$_SERVER['REDIRECT_URL']);
+					exit();
+				}
+			}
+			
+			
+			
+			
+			
+			else if (isset($_GET['action']) && $_GET['action'] === "add") {
 				$this->_question['title'] = "Ajouter une question";
 			} else {
-				$this->_global = $global;
 				$this->_question = $this->_global['db']->getQuestion($_GET['id']);
 				$cleanTitle = $this->_global['fn']->clean($this->_question['title']);
 				if (empty($this->_question)) throw new Error("404");
@@ -34,25 +48,6 @@
 				if (isset($_SESSION['user'])) {
 					$user = unserialize($_SESSION['user']);
 					if ($this->_question['username'] === $user->getUsername()) $isOwner = true;
-				}
-				
-				if(!empty($_POST['Delete'])&&$this->_global['db']->setCorrectAnswer($_GET['id'])&&$this->_global['db']->deleteVotes($_GET['id'])) {
-					if ($this->_global['db']->deleteAnswers($_GET['id'])) {
-						if ($this->_global['db']->deleteQuestion($_GET['id'])) {
-							$_SESSION['code'] = "S12";
-							header("Location:/");
-						}
-					}
-				}
-				
-				if(!empty($_POST['url'])){
-					$referer_question_id = $_POST['url'];
-					$referer_question_id = mb_ereg_replace("[^0-9]",'',$referer_question_id) ;
-					if(!is_bool($referer_question_id)&&$this->_global['db']->setDuplicated($_GET['id'],$referer_question_id)){
-						$this->_global['db']->changeStateQuestion($_GET['id'],'d');
-						$_SESSION['code'] = "S11";
-						header("Location: /question/".$_GET['id']."/");
-					}
 				}
 				
 				require_once (PATH_VIEWS."question.php");

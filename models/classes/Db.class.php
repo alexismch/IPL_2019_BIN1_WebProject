@@ -43,6 +43,7 @@
 			$request->execute();
 			return $request->fetch();
 		}
+		
 		public function getCategoryById($category_id){
             $request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.category_id = $category_id");
             $request->execute();
@@ -231,9 +232,12 @@
         }
 
         public function setDuplicated($question_id, $referer_question_id){
-            $request=("UPDATE questions SET referer_question_id=$referer_question_id WHERE question_id= $question_id");
-            $ps=$this->_db->prepare($request);
+            $request=("UPDATE questions SET referer_question_id = :refererId WHERE question_id = :questionId");
+            $ps = $this->_db->prepare($request);
+            $ps->bindValue('refererId', $referer_question_id, PDO::PARAM_INT);
+            $ps->bindValue('questionId', $question_id, PDO::PARAM_INT);
             $ps->execute();
+            $this->changeStateQuestion($question_id, 'd');
 		    return true;
         }
         
@@ -243,6 +247,7 @@
             $ps->execute();
             return true;
         }
+        
         public  function setCorrectAnswer($question_id){
 		    $query="UPDATE questions SET correct_answer_id=null ";
 		    $ps=$this->_db->prepare($query);
