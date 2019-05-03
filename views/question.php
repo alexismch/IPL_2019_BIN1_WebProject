@@ -17,7 +17,7 @@
                                     <div class="form-section" id="url-section">
                                         <label for="Question_id">Identifiant de la question:</label>
                                         <input type="number" min="0"  name="refererId" id="Question_id" >
-                                        <input type="submit" name="delete" class="Dubliquer"/>
+                                        <input type="submit" name="duplicate" class="Dubliquer"/>
                                     </div>
                                 </form>
                             </div>

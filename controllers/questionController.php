@@ -8,7 +8,7 @@
 		public function __construct($global) {
 			$this->_global = $global;
 
-			if (isset($_POST['delete'])) {
+			if (isset($_POST['duplicate'])) {
 				$refererId = $_POST['refererId'];
 				if ($this->_global['db']->setDuplicated($_GET['id'], $refererId)) {
 					$_SESSION['code'] = "S11";
@@ -16,11 +16,15 @@
 					exit();
 				}
 			}
-			
-			
-			
-			
-			
+			elseif(isset($_POST['delete'])){
+                if($this->_global['db']->deleteQuestion($_GET['id'])){
+                    $_SESSION['code'] = "S12";
+                    header("Location: ".$_SERVER['REDIRECT_URL']);
+                    exit();
+
+                }
+            }
+
 			else if (isset($_GET['action']) && $_GET['action'] === "add") {
 				$this->_question['title'] = "Ajouter une question";
 			} else {

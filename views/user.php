@@ -42,7 +42,7 @@
             foreach($this->_questions as $i =>$question){
 
                 echo'<tr>';
-                echo '<td>['.$question['question_id'].']</td>';
+                echo '<td>['.$question['category_id'].']</td>';
                 echo'<td><a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '"><h3>' . $question['title'] . '</h3></a>.</td>';
                 echo'</tr>';
 
@@ -63,6 +63,7 @@
 
         <form action="?action=allUser" method="POST">
             <input type="hidden" id="allUsers" name="allUsers" value="allUsers">
+
             <input type="submit" class="btn btn-secondary" value="   Afficher tous les utilisateurs    ">
         </form>
 

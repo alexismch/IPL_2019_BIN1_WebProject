@@ -45,8 +45,10 @@
 		}
 		
 		public function getCategoryById($category_id){
-            $request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.category_id = $category_id");
+            $request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.category_id = :category_id");
+            $request->bindValue("category_id",$category_id,PDO::PARAM_INT);
             $request->execute();
+
             $category=$request['name'];
 		    return $category;
         }
@@ -100,10 +102,10 @@
         public function getQuestionsUser($userID){
             $request= $this->_db->prepare("SELECT q.*
 							FROM class_not_found.questions q
-							WHERE q.user_id=$userID
+							WHERE q.user_id=:userID
 	  					ORDER BY q.creation_date DESC");
 
-
+            $request->bindValue("userID",$userID,PDO::PARAM_INT);
             $request->execute();
             return $request->fetchAll();
         }
@@ -242,8 +244,9 @@
         }
         
         public function deleteVotes($question_id){
-            $query=("DELETE FROM votes  WHERE votes.answer_id IN (SELECT answer_id FROM answers WHERE question_id=$question_id)");
+            $query=("DELETE FROM votes  WHERE votes.answer_id IN (SELECT answer_id FROM answers WHERE question_id= :question_id)");
             $ps=$this->_db->prepare($query);
+            $ps->bindValue('question_id',$question_id,PDO::PARAM_INT);
             $ps->execute();
             return true;
         }
@@ -257,17 +260,28 @@
         }
         
         public function deleteAnswers($question_id){
-            $query=("DELETE FROM answers WHERE answers.question_id=$question_id");
+            $query=("DELETE FROM answers WHERE answers.question_id= :question_id");
             $ps=$this->_db->prepare($query);
+            $ps->bindValue('question_id',$question_id,PDO::PARAM_INT);
             $ps->execute();
             return true;
         }
         
         public function deleteQuestion($question_id){
-		    $request=("DELETE FROM questions WHERE questions.question_id=$question_id");
+		    $request=("DELETE FROM questions WHERE questions.question_id= :question_id");
 		    $ps=$this->_db->prepare($request);
-		    $ps->execute();
-		    return true;
+		    $ps->bindValue('question_id',$question_id,PDO::PARAM_INT);
+		    if($this->setCorrectAnswer($question_id)){
+		        if($this->deleteVotes($question_id)){
+		            if($this->deleteAnswers($question_id)){
+                        $ps->execute();
+                        return true;
+                    }
+                }
+            }
+
+		    return false;
+
         }
         
         public function insertUser($name, $firstname, $email, $username, $pwd) {

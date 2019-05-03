@@ -4,7 +4,7 @@
 		private $_user;
 		private $_questions;
         private $_allUsers;
-        
+        private $_categories;
 		public function __construct($global) {
 			$this->_global = $global;
 			
@@ -14,7 +14,6 @@
 			}
 			$this->_questions=$this->_global['db']->getQuestionsUser($this->_user->getId());
 
-
 			require_once (PATH_VIEWS."heads/userHead.php");
 		}
 		
@@ -22,6 +21,7 @@
             if(!empty($_POST['allUsers'])){
                 $this->_allUsers=$this->_global['db']->getAllUsers();
                require_once (PATH_VIEWS."users.php");
+
                exit();
 
             }
