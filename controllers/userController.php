@@ -12,7 +12,9 @@
 			if (empty($this->_user)) {
 				throw new Error("404");
 			}
-			
+			$this->_questions=$this->_global['db']->getQuestionsUser($this->_user->getId());
+
+
 			require_once (PATH_VIEWS."heads/userHead.php");
 		}
 		

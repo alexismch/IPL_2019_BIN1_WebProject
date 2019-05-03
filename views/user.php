@@ -28,16 +28,34 @@
     <?php }?>
 
     <h2>fiche de: <?php echo $this->_user->getUsername(); ?></h2>
-
     <p>
+        <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>categorie</th>
+            <th>Titre</th>
+
+        </tr>
+        </thead>
+        <tbody>
         <?php
             foreach($this->_questions as $i =>$question){
-                echo'<a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '"><h3>' . $question['title'] . '</h3></a></br>';
+
+                echo'<tr>';
+                echo '<td>['.$question['question_id'].']</td>';
+                echo'<td><a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '"><h3>' . $question['title'] . '</h3></a>.</td>';
+                echo'</tr>';
+
+
+
+
             }
 
         ?>
-    </p>
 
+        </tbody>
+    </table>
+    </table>
 
 
     <?php if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']){?>

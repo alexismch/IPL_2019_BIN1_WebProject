@@ -28,10 +28,6 @@
 				if ($this->_question['username'] === $user->getUsername()) $isOwner = true;
 			}
 
-
-
-
-
 			if(!empty($_POST['Delete'])&&$this->_global['db']->setCorrectAnswer($_GET['id'])&&$this->_global['db']->deleteVotes($_GET['id'])) {
                 if ($this->_global['db']->deleteAnswers($_GET['id'])) {
 
@@ -43,14 +39,18 @@
                     }
                 }
             }
-            if(!empty($_POST['url'])){
+            if(!empty($_POST['Question_id'])&&!empty($this->_global['db']->getQuestion($_POST['Question_id']))){
 
-                $referer_question_id=$_POST['url'];
-                $referer_question_id=mb_ereg_replace("[^0-9]",'',$referer_question_id) ;
-                if(!is_bool($referer_question_id)&&$this->_global['db']->setDuplicated($_GET['id'],$referer_question_id)){
+                $referer_question_id=$_POST['Question_id'];
+
+                if($this->_global['db']->setDuplicated($_GET['id'],$referer_question_id)){
                     $this->_global['db']->changeStateQuestion($_GET['id'],'d');
                     $_SESSION['code'] = "S11";
                     header("Location: /question/".$_GET['id']."/");
+                }
+                else{
+                    echo'pas ok';
+
                 }
 
             }

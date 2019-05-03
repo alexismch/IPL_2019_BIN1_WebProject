@@ -15,8 +15,8 @@
                             <div class="modal-body">
                                 <form class="duplicate-form" action="?action=duplicate" method="POST">
                                     <div class="form-section" id="url-section">
-                                        <label for="url">L'url:</label>
-                                        <input type="url" name="url" id="url" >
+                                        <label for="Question_id">Identifiant de la question:</label>
+                                        <input type="number" min="0"  name="Question_id" id="Question_id" >
                                         <input type="submit" class="Dubliquer"/>
                                     </div>
                                 </form>
