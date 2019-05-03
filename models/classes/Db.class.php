@@ -43,6 +43,12 @@
 			$request->execute();
 			return $request->fetch();
 		}
+		public function getCategoryById($category_id){
+            $request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.category_id = $category_id");
+            $request->execute();
+            $category=$request['name'];
+		    return $category;
+        }
 		
 		public function getQuestions() {
 			$type = func_get_arg(0);
