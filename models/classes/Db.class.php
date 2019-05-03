@@ -45,12 +45,13 @@
 		}
 		
 		public function getCategoryById($category_id){
-            $request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.category_id = :category_id");
+            $request = $this->_db->prepare("SELECT c.name FROM class_not_found.categories c WHERE c.category_id = :category_id");
             $request->bindValue("category_id",$category_id,PDO::PARAM_INT);
+
             $request->execute();
 
-            $category=$request['name'];
-		    return $category;
+
+		    return $request->fetch();
         }
 		
 		public function getQuestions() {

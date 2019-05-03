@@ -7,6 +7,9 @@
         <th scope="col">prénom</th>
         <th scope="col">nom</th>
         <th scope="col">mail</th>
+        <th scope="col">est Admin?</th>
+        <th scope="col">est suspendu?</th>
+
     </tr>
     </thead>
     <tbody>
@@ -19,6 +22,8 @@
                         echo'<td>'.$user['firstname'].'</td>';
                         echo'<td>'.$user['name'].'</td>';
                         echo'<td>'.$user['email'].'</td>';
+                        echo'<td>'.$user['isAdmin'].'</td>';
+                        echo'<td>'.$user['isLocked'].'</td>';
                         echo'</tr>';
                     }
              ?>

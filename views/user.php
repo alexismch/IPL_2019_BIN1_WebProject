@@ -3,7 +3,7 @@
 
 
     <?php if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']){?>
-        <form action="?action=suspendre" method="POST">
+        <form action="?action=suspendre"  method="POST">
             <?php if($this->_user->isLocked()==0){ ?>
                 <input type="hidden" id="suspendre" name="suspendre" value="Suspendre">
                 <input type="submit" class="btn btn-info" value="suspendre">
@@ -16,7 +16,7 @@
 
         </form>
 
-        <form action="?action=Admin" method="POST">
+        <form action="?action=Admin"  method="POST">
             <?php if($this->_user->isAdmin()==0){ ?>
                 <input type="hidden" id="admin" name="Admin" value="admin">
                 <input type="submit" class="btn btn-info" value="   Admin    ">
@@ -42,7 +42,10 @@
             foreach($this->_questions as $i =>$question){
 
                 echo'<tr>';
-                echo '<td>['.$question['category_id'].']</td>';
+
+
+                echo'<td><a href="/category/' .userController::getCategory($question['category_id'])[0]. '"><h3>' . userController::getCategory($question['category_id'])[0]. '</h3></a>.</td>';
+
                 echo'<td><a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '"><h3>' . $question['title'] . '</h3></a>.</td>';
                 echo'</tr>';
 
