@@ -11,4 +11,6 @@
 			$string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars
 			return rtrim($string,"- "); // Removes last - if exists
 		}
+
+
 	}

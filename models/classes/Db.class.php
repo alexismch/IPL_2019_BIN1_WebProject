@@ -45,7 +45,7 @@
 		}
 		
 		public function getCategoryById($category_id){
-            $request = $this->_db->prepare("SELECT c.name FROM class_not_found.categories c WHERE c.category_id = :category_id");
+            $request = $this->_db->prepare("SELECT c.name,c.link_referer FROM class_not_found.categories c WHERE c.category_id = :category_id");
             $request->bindValue("category_id",$category_id,PDO::PARAM_INT);
 
             $request->execute();

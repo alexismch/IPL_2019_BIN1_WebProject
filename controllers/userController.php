@@ -54,10 +54,5 @@
             }
             require_once (PATH_VIEWS."user.php");
 		}
-		public function getCategory($categoryId){
 
-		    $categoryName=$this->_global['db']->getCategoryById($categoryId);
-
-		    return $categoryName;
-        }
 	}
