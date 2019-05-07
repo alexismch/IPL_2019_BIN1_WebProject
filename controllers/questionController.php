@@ -16,14 +16,14 @@
 					exit();
 				}
 			}
-			elseif(isset($_POST['delete'])){
+			else if (isset($_POST['delete'])){
                 if($this->_global['db']->deleteQuestion($_GET['id'])){
                     $_SESSION['code'] = "S12";
                     header("Location: /");
                     exit();
 
                 }
-            } else if(isset($_POST['open'])){
+            } else if (isset($_POST['open'])){
 			    if($this->_global['db']->setOpen($_GET['id'])){
 			        $_SESSION['code']="S11";
                     header("Location: ".$_SERVER['REDIRECT_URL']);
