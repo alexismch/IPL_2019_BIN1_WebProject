@@ -30,8 +30,6 @@
                     exit();
                 }
             } else if (isset($_GET['action']) && $_GET['action'] === "add") {
-				$this->_question['title'] = "Ajouter une question";
-            } else if (isset($_GET['action']) && $_GET['action'] === "add") {
 				if (!isset($_SESSION['isConnected']) || !$_SESSION['isConnected']) {
 					$_SESSION['form']['formURL'] = "/question/add";
 					$_SESSION['code'] = "E9";
@@ -64,6 +62,7 @@
 		
 		public function run() {
 			if (isset($_GET['action']) && $_GET['action'] === "add") {
+				$categories = $this->_global['db']->getCategories();
 				require_once (PATH_VIEWS."questionForm.php");
 			} else {
 				$isOwner = false;

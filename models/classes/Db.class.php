@@ -267,6 +267,7 @@
             $this->changeStateQuestion($question_id, 'd');
 		    return true;
         }
+        
         public function setOpen($question_id){
             $request=("UPDATE questions SET referer_question_id = NULL WHERE question_id = :questionId");
             $ps = $this->_db->prepare($request);

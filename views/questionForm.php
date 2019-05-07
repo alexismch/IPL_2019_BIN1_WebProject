@@ -17,7 +17,7 @@
 		</div>
 		<div class="form-section">
 			<label for="subject">Question</label>
-			<textarea id="subject" name="subject" placeholder="Entrez votre question tout en étant clair et précis..." required></textarea>
+			<textarea id="subject" name="subject" minlength="20" placeholder="Entrez votre question tout en étant clair et précis..." required></textarea>
 		</div>
         <div id="submit-section">
             <button name="add-question-form" type="submit">Partager</button>
