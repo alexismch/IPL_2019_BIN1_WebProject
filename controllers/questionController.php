@@ -15,13 +15,22 @@
 					header("Location: ".$_SERVER['REDIRECT_URL']);
 					exit();
 				}
-			} else if (isset($_POST['delete'])){
+			}
+			elseif(isset($_POST['delete'])){
                 if($this->_global['db']->deleteQuestion($_GET['id'])){
                     $_SESSION['code'] = "S12";
-                    header("Location: /");
+                    header("Location: ".$_SERVER['REDIRECT_URL']);
                     exit();
 
                 }
+            } else if(isset($_POST['open'])){
+			    if($this->_global['db']->setOpen($_GET['id'])){
+			        $_SESSION['code']="S11";
+                    header("Location: ".$_SERVER['REDIRECT_URL']);
+                    exit();
+                }
+            } else if (isset($_GET['action']) && $_GET['action'] === "add") {
+				$this->_question['title'] = "Ajouter une question";
             } else if (isset($_GET['action']) && $_GET['action'] === "add") {
 				if (!isset($_SESSION['isConnected']) || !$_SESSION['isConnected']) {
 					$_SESSION['form']['formURL'] = "/question/add";
@@ -33,7 +42,7 @@
 					$cat = $_POST['category'];
 					$subject = $_POST['subject'];
 					$id = $this->_global['db']->addQuestion($title, $cat, $subject);
-					$_SESSION['code'] = "S13";
+					$_SESSION['code'] = "S14";
 					header("Location: /question/".$id);
 					exit();
 				} else
@@ -55,7 +64,6 @@
 		
 		public function run() {
 			if (isset($_GET['action']) && $_GET['action'] === "add") {
-				$categories = $this->_global['db']->getCategories();
 				require_once (PATH_VIEWS."questionForm.php");
 			} else {
 				$isOwner = false;

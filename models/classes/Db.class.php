@@ -267,6 +267,14 @@
             $this->changeStateQuestion($question_id, 'd');
 		    return true;
         }
+        public function setOpen($question_id){
+            $request=("UPDATE questions SET referer_question_id = NULL WHERE question_id = :questionId");
+            $ps = $this->_db->prepare($request);
+            $ps->bindValue('questionId', $question_id, PDO::PARAM_INT);
+            $ps->execute();
+            $this->changeStateQuestion($question_id, 'o');
+            return true;
+        }
         
         public function deleteVotes($question_id){
             $query=("DELETE FROM votes  WHERE votes.answer_id IN (SELECT answer_id FROM answers WHERE question_id= :question_id)");

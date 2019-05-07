@@ -2,6 +2,7 @@
     <?php
         if(!empty($_SESSION['isConnected']) && $_SESSION['isAdmin']) {
             ?>
+            <?php if($this->_question['state']=='o'||$this->_question['state']=='s'){?>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Duplicate">Dupliquer</button>
                 <div class="modal fade" id="Duplicate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -25,7 +26,33 @@
                         </div>
                     </div>
                 </div>
-            
+                <?php } else{ ?>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Open">Ouvrir à la discussion</button>
+                <div class="modal fade" id="Open" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="open_Question">ouvrire la question</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="open-form" action="" method="POST">
+                                    <div class="form-section" id="url-section">
+
+                                        <input type="submit" name="open" class="Open"/>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <?php }?>
+
+
+
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">Supprimer</button>
                 <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
                     <div class="modal-dialog" role="document">

@@ -34,14 +34,9 @@
         <tbody>
         <?php
             foreach($this->_questions as $i =>$question){
-                print_r($this->_global['db']->getCategoryById($question['category_id'])['name']);
+
                 echo'<tr>';
                 echo'<td><a href="/category/' .$this->_global['db']->getCategoryById($question['category_id'])['link_referer']. '"><h3>' . $this->_global['db']->getCategoryById($question['category_id'])['name']. '</h3></a>.</td>';
-
-
-
-
-
                 echo'<td><a href="/question/' .$question['question_id'].'/'.$this->_global['fn']->clean($question['title']) . '"><h3>' . $question['title'] . '</h3></a>.</td>';
                 echo '<td>'.(($question['state']==='o') ? 'ouvert':(($question['state']==='d')?'dupliqué':'résolu')).'</td>';
                 echo'</tr>';
