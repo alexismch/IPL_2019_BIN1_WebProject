@@ -24,6 +24,13 @@
 
                 }
             }
+			elseif(isset($_POST['open'])){
+			    if($this->_global['db']->setOpen($_GET['id'])){
+			        $_SESSION['code']="S11";
+                    header("Location: ".$_SERVER['REDIRECT_URL']);
+                    exit();
+                }
+            }
 
 			else if (isset($_GET['action']) && $_GET['action'] === "add") {
 				$this->_question['title'] = "Ajouter une question";

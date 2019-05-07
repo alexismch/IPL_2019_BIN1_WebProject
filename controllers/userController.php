@@ -4,7 +4,11 @@
 		private $_user;
 		private $_questions;
         private $_allUsers;
-
+#
+#
+#on ne peux pas mettre Son compte en tant que membre
+#
+#
 		public function __construct($global) {
 			$this->_global = $global;
 			
