@@ -15,18 +15,29 @@
 					header("Location: ".$_SERVER['REDIRECT_URL']);
 					exit();
 				}
-			}
-			elseif(isset($_POST['delete'])){
+			} else if (isset($_POST['delete'])){
                 if($this->_global['db']->deleteQuestion($_GET['id'])){
                     $_SESSION['code'] = "S12";
-                    header("Location: ".$_SERVER['REDIRECT_URL']);
+                    header("Location: /");
                     exit();
 
                 }
-            }
-
-			else if (isset($_GET['action']) && $_GET['action'] === "add") {
-				$this->_question['title'] = "Ajouter une question";
+            } else if (isset($_GET['action']) && $_GET['action'] === "add") {
+				if (!isset($_SESSION['isConnected']) || !$_SESSION['isConnected']) {
+					$_SESSION['form']['formURL'] = "/question/add";
+					$_SESSION['code'] = "E9";
+					header("Location: /login");
+					exit();
+				} else if (isset($_POST['add-question-form'])) {
+					$title = $_POST['title'];
+					$cat = $_POST['category'];
+					$subject = $_POST['subject'];
+					$id = $this->_global['db']->addQuestion($title, $cat, $subject);
+					$_SESSION['code'] = "S13";
+					header("Location: /question/".$id);
+					exit();
+				} else
+					$this->_question['title'] = "Ajouter une question";
 			} else {
 				$this->_question = $this->_global['db']->getQuestion($_GET['id']);
 				$cleanTitle = $this->_global['fn']->clean($this->_question['title']);
@@ -44,6 +55,7 @@
 		
 		public function run() {
 			if (isset($_GET['action']) && $_GET['action'] === "add") {
+				$categories = $this->_global['db']->getCategories();
 				require_once (PATH_VIEWS."questionForm.php");
 			} else {
 				$isOwner = false;

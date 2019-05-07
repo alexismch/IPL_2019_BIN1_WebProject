@@ -1,6 +1,6 @@
 <div class="question">
     <?php
-        if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']) {
+        if(!empty($_SESSION['isConnected']) && $_SESSION['isAdmin']) {
             ?>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Duplicate">Dupliquer</button>
                 <div class="modal fade" id="Duplicate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -142,6 +142,7 @@
             if ($this->_question['state'] === 'd') {
                 ?>
                     <h4>Vous ne pouvez rajouter une réponse à une question dupliquée !</h4>
+                    <a class="duplicated-link" href="/question/<?php echo $this->_question['referer_question_id']?>">Aller à la question originale</a>
 	            <?php
             } else {
                 ?>

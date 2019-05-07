@@ -34,25 +34,28 @@
 		public function getCategories() {
 			$request = $this->_db->prepare("SELECT * FROM class_not_found.categories cat ORDER BY cat.category_id");
 			$request->execute();
-			return $request->fetchAll();
+			$cats = $request->fetchAll();
+			$request->closeCursor();
+			return $cats;
 		}
 		
 		public function getCategory($referer) {
 			$request = $this->_db->prepare("SELECT * FROM class_not_found.categories c WHERE c.link_referer = :referer");
 			$request->bindValue('referer', $referer, PDO::PARAM_STR);
 			$request->execute();
-			return $request->fetch();
+			$cat = $request->fetch();
+			$request->closeCursor();
+			return $cat;
 		}
 		
 		public function getCategoryById($category_id){
             $request = $this->_db->prepare("SELECT c.name,c.link_referer FROM class_not_found.categories c WHERE c.category_id = :category_id");
             $request->bindValue("category_id",$category_id,PDO::PARAM_INT);
-
             $request->execute();
-
-
-		    return $request->fetch();
-        }
+		    $cat = $request->fetch();
+			$request->closeCursor();
+			return $cat;
+		}
 		
 		public function getQuestions() {
 			$type = func_get_arg(0);
@@ -86,7 +89,9 @@
 				$request = $this->_db->prepare("SELECT * FROM class_not_found.questions q ORDER BY q.creation_date DESC");
 			}
 			$request->execute();
-			return $request->fetchAll();
+			$quests = $request->fetchAll();
+			$request->closeCursor();
+			return $quests;
 		}
 
         public function getQuestionsSearch($keyWord){#find all the question who contain the keyWord
@@ -97,7 +102,9 @@
 
 
             $request->execute();
-            return $request->fetchAll();
+	        $quests =  $request->fetchAll();
+	        $request->closeCursor();
+			return $quests;
         }
         
         public function getQuestionsUser($userID){
@@ -108,7 +115,9 @@
 
             $request->bindValue("userID",$userID,PDO::PARAM_INT);
             $request->execute();
-            return $request->fetchAll();
+            $quests =  $request->fetchAll();
+	        $request->closeCursor();
+			return $quests;
         }
         
 		public function getQuestion($id) {
@@ -117,7 +126,9 @@
 					WHERE q.question_id = :id AND c.category_id = q.category_id AND q.user_id = u.user_id");
 			$request->bindValue('id', $id, PDO::PARAM_INT);
 			$request->execute();
-			return $request->fetch();
+			$quest =  $request->fetch();
+			$request->closeCursor();
+			return $quest;
 		}
 		
 		public function getAnswers($questionId) {
@@ -130,7 +141,9 @@
 					GROUP BY a.answer_id");
 			$request->bindValue('questionId', $questionId, PDO::PARAM_INT);
 			$request->execute();
-			return $request->fetchAll();
+			$return =  $request->fetchAll();
+			$request->closeCursor();
+			return $return;
 		}
 		
 		public function getAnswersVoted($questionId) {
@@ -147,6 +160,7 @@
 			foreach ($resultTemp AS $key => $value) {
 				$result[$value['answer_id']] = $value['value'];
 			}
+			$request->closeCursor();
 			return $result;
 		}
 		
@@ -157,7 +171,8 @@
             $user = $request->fetch();
             if ($user == null) return null;
             $user = new User($user['user_id'], $user['name'], $user['firstname'], $user['username'], $user['email'], $user['passwd'], $user['isLocked'], $user['isAdmin']);
-            return $user;
+	        $request->closeCursor();
+	        return $user;
         }
         
         public function getOwnerByAnswer($answerId) {
@@ -167,7 +182,9 @@
 					AND u.user_id = q.user_id");
 			$request->bindValue("answerId", $answerId, PDO::PARAM_INT);
 			$request->execute();
-			return $request->fetch()['username'];
+			$username = $request->fetch()['username'];
+	        $request->closeCursor();
+	        return $username;
         }
         
         public function getQuestionByAnswer($answerId) {
@@ -176,7 +193,9 @@
 					AND q.question_id = a.question_id");
 	        $request->bindValue("answerId", $answerId, PDO::PARAM_INT);
 	        $request->execute();
-	        return $request->fetch()['question_id'];
+	        $id = $request->fetch()['question_id'];
+	        $request->closeCursor();
+	        return $id;
         }
         
         public function markCorrectAnswer($answerId) {
@@ -190,6 +209,7 @@
 			$request->bindValue("correctAnswer", $answerId, PDO::PARAM_INT);
 			$request->execute();
 			$this->autoChangeStateQuestionOf($answerId);
+	        $request->closeCursor();
         }
 		
 		public function autoChangeStateQuestionOf($answerId) {
@@ -200,6 +220,7 @@
 					WHERE q.question_id = questionId.question_id");
 			$request->bindValue('answerId', $answerId, PDO::PARAM_INT);
 			$request->execute();
+			$request->closeCursor();
 		}
 		
 		public function changeStateQuestion($questionId, $state) {
@@ -207,18 +228,20 @@
 			$request->bindValue('state', $state, PDO::PARAM_STR_CHAR);
 			$request->bindValue('questionId', $questionId, PDO::PARAM_INT);
 			$request->execute();
+			$request->closeCursor();
 		}
         
         public function addAnswer($questionId, $answer) {
 			if (strlen($answer) < 20) return false;
 			$request = $this->_db->prepare("INSERT INTO class_not_found.answers (creation_date, subject, question_id, user_id)
 					VALUES (NOW(), :answer, :questionId, :userId)");
-			$request->bindValue("answer", htmlspecialchars($answer), PDO::PARAM_STR);
+			$request->bindValue("answer", nl2br(htmlspecialchars($answer)), PDO::PARAM_STR);
 			$request->bindValue("questionId", $questionId, PDO::PARAM_INT);
 			$user = unserialize($_SESSION['user']);
 			$request->bindValue("userId", $user->getId(), PDO::PARAM_INT);
 			$request->execute();
-			return true;
+	        $request->closeCursor();
+	        return true;
         }
         
         public function voteForAnswer($answerId, $vote) {
@@ -232,6 +255,7 @@
 			$request->bindValue("answerId", $answerId, PDO::PARAM_INT);
 			$request->bindValue("vote", $vote, PDO::PARAM_INT);
 			$request->execute();
+	        $request->closeCursor();
         }
 
         public function setDuplicated($question_id, $referer_question_id){
@@ -256,7 +280,6 @@
 		    $query="UPDATE questions SET correct_answer_id=null ";
 		    $ps=$this->_db->prepare($query);
 		    $ps->execute();
-
 		    return true;
         }
         
@@ -333,5 +356,22 @@
             $ps->bindValue(':username',$username);
             $ps->execute();
             return ($ps->rowcount() != 0);
+        }
+        
+        public function addQuestion($title, $category, $subject) {
+			$user = unserialize($_SESSION['user']);
+			$request = $this->_db->prepare("INSERT INTO class_not_found.questions (title, category_id, subject, creation_date, user_id) VALUES (:title, :cat, :subject, NOW(), :userId)");
+			$request->bindValue('title', $title, PDO::PARAM_STR);
+			$request->bindValue('cat', $category, PDO::PARAM_INT);
+			$request->bindValue('subject', nl2br(htmlspecialchars($subject)), PDO::PARAM_STR);
+			$request->bindValue('userId', $user->getId(), PDO::PARAM_INT);
+			$request->execute();
+			$request->closeCursor();
+			$request = $this->_db->prepare("SELECT q.question_id FROM class_not_found.questions q WHERE q.title = :title");
+			$request->bindValue('title', $title, PDO::PARAM_STR);
+			$request->execute();
+			$id = $request->fetch()['question_id'];
+			$request->closeCursor();
+			return (int) $id;
         }
 	}
