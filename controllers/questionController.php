@@ -19,7 +19,7 @@
 			elseif(isset($_POST['delete'])){
                 if($this->_global['db']->deleteQuestion($_GET['id'])){
                     $_SESSION['code'] = "S12";
-                    header("Location: ".$_SERVER['REDIRECT_URL']);
+                    header("Location: /");
                     exit();
 
                 }
