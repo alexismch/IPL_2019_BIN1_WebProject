@@ -157,6 +157,7 @@
 			$request->bindValue("userId", $user->getId(), PDO::PARAM_INT);
 			$request->execute();
 			$resultTemp = $request->fetchAll();
+			$result = [];
 			foreach ($resultTemp AS $key => $value) {
 				$result[$value['answer_id']] = $value['value'];
 			}
