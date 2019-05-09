@@ -11,7 +11,7 @@
 #
 		public function __construct($global) {
 			$this->_global = $global;
-			
+
 			$this->_user = $this->_global['db']->getUser($_GET['username']);
 			if (empty($this->_user)) {
 				throw new Error("404");

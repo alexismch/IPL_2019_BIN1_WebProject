@@ -270,11 +270,12 @@
         }
         
         public function setOpen($question_id){
-            $request=("UPDATE questions SET referer_question_id = NULL WHERE question_id = :questionId");
+            $request=("UPDATE questions SET referer_question_id = NULL, correct_answer_id=NULL WHERE question_id = :questionId");
             $ps = $this->_db->prepare($request);
             $ps->bindValue('questionId', $question_id, PDO::PARAM_INT);
             $ps->execute();
             $this->changeStateQuestion($question_id, 'o');
+
             return true;
         }
         
