@@ -2,7 +2,7 @@
     <?php
         if(!empty($_SESSION['isConnected']) && $_SESSION['isAdmin']) {
             ?>
-            <?php if($this->_question['state']=='o'||$this->_question['state']=='s'){?>
+            <?php if($this->_question['state']=='o'||$this->_question['state']=='s') { ?>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Duplicate">Dupliquer</button>
                 <div class="modal fade" id="Duplicate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <?php } else{ ?>
+                <?php } else { ?>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Open">Ouvrir à la discussion</button>
                 <div class="modal fade" id="Open" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -50,9 +50,6 @@
                     </div>
                 </div>
                 <?php }?>
-
-
-
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Delete">Supprimer</button>
                 <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -76,10 +73,9 @@
                 </div>
             <?php
         }
-
         if ($isOwner) {
             ?>
-                <div class="modal fade" id="myModal" role="dialog" style="transform: translateY(25%)">
+                <div class="modal fade" id="myModal" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -144,16 +140,22 @@
 		        }
 		        echo '<div class="answer">';
                     echo '<div class="mark-correct">';
-                        $a = 'data-toggle="tooltip" data-placement="top"' . (($isCorrect) ? 'class="selected" title="C\'est la bonne réponse"' : 'title="C\'est une réponse normale"');
-                        if ($isOwner) $a = 'href="/answer/mark/' . $value['answer_id'] . '/correct" data-toggle="tooltip" data-placement="top"' . (($isCorrect) ? ' class="owned selected" title="Enlever le marquage de bonne réponse"' : ' class="owned" title="Marquer comme bonne réponse"');
+		                if ($this->_question['state'] === 'd') $a = 'data-toggle="tooltip" data-placement="top"' . (($isCorrect) ? 'class="disabled selected" title="C\'est la bonne réponse"' : 'class="disabled" title="C\'est une réponse normale"');
+		                else $a = 'data-toggle="tooltip" data-placement="top"' . (($isCorrect) ? 'class="selected" title="C\'est la bonne réponse"' : 'title="C\'est une réponse normale"');
+                        if ($isOwner) {
+	                        if ($this->_question['state'] === 'd') $a = 'data-toggle="tooltip" data-placement="top"' . (($isCorrect) ? ' class="owned selected disabled" title="Enlever le marquage de bonne réponse"' : ' class="owned disabled" title="Marquer comme bonne réponse"');
+	                        else $a = 'href="/answer/mark/' . $value['answer_id'] . '/correct" data-toggle="tooltip" data-placement="top"' . (($isCorrect) ? ' class="owned selected" title="Enlever le marquage de bonne réponse"' : ' class="owned" title="Marquer comme bonne réponse"');
+                        }
                         echo '<a ' . $a . '><span class="glyphicon glyphicon-check"></span></a>';
                     echo '</div>';
                     echo '<div class="vote">';
-                        echo '<a href="/answer/vote/' . $value['answer_id'] . '/up"' . (($for) ? ' class="for selected" title="Enlever le vote"' : ' title="Voter pour"') . ' data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
+                        if ($this->_question['state'] === 'd') echo '<a '. (($for) ? 'class="for selected disabled" title="Enlever le vote"' : 'class="disabled" title="Voter pour"') . ' data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
+                        else echo '<a href="/answer/vote/' . $value['answer_id'] . '/up"' . (($for) ? ' class="for selected" title="Enlever le vote"' : ' title="Voter pour"') . ' data-toggle="tooltip" data-placement="top"><span class="glyphicon glyphicon-thumbs-up"></span></a>';
                             echo '<span class="nbVotesF">' . $value['nbrVotesF'] . '</span>';
 		                    echo '<div class="horizontal-separator-mini"></div>';
 		                    echo '<span>' . $value['nbrVotesA'] . '</span>';
-                        echo '<a href="/answer/vote/' . $value['answer_id'] . '/down"' . (($against) ? ' class="against selected" title="Enlever le vote"' : ' title="Voter contre"') . ' data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
+		                if ($this->_question['state'] === 'd') echo '<a '.(($against) ? 'class="against selected disabled" title="Enlever le vote"' : 'class="disabled" title="Voter contre"') . ' data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
+                        else echo '<a href="/answer/vote/' . $value['answer_id'] . '/down"' . (($against) ? ' class="against selected" title="Enlever le vote"' : ' title="Voter contre"') . ' data-toggle="tooltip" data-placement="bottom"><span class="glyphicon glyphicon-thumbs-down"></span></a>';
                     echo '</div>';
                     echo '<div class="content">';
                         echo '<h4>de <a href="/user/' . $value['username'] . '">' . $value['username'] . '</a></h4>';

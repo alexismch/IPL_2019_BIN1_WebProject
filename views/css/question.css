@@ -196,3 +196,13 @@ a.against.selected {
 .form-section textarea {
     min-height: 129px;
 }
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.modal {
+    transform: translateY(25%);
+}
