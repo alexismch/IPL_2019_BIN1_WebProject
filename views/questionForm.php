@@ -6,7 +6,7 @@
 			<input type="text" name="title" id="title" required>
 		</div>
 		<div class="form-section">
-			<label>Catégorie</label>
+			<label for="category">Catégorie</label>
 			<select id="category" name="category" required>
 				<?php
 					foreach ($categories AS $key => $value) {

@@ -19,10 +19,9 @@
 </div>
 <div id="about-display">
     <h1>À notre propos...</h1>
-    <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-
-        Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Veni vidi fisti
+    <p>
+        ClassNotFound© est une organisation indépendante qui a pour but, via son site, de mettre en communcation toute la communauté Informatique afin d'instaurer une entraide.
+        <br>Entraide qui permettra aux "newbies" d'évoluer vers un avenir prometteur, et aux plus avancés d'encore s'améliorer.
     </p>
 </div>
 <div id="categories-display">

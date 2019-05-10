@@ -45,9 +45,6 @@
         </tbody>
     </table>
     <?php if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']){?>
-        <form action="?action=allUser" method="POST">
-            <input type="hidden" id="allUsers" name="allUsers" value="allUsers">
-            <input type="submit" class="btn btn-secondary" value="   Afficher tous les utilisateurs    ">
-        </form>
+        <a href="/user/all">Afficher tous les utilisateurs</a>
     <?php } ?>
 </div>

@@ -320,6 +320,7 @@
         }
         
         public function insertUser($name, $firstname, $email, $username, $pwd) {
+			if ($username === "all") return "Vous ne pouvez choisir ce nom d'utilisateur...";
             $query = "INSERT INTO class_not_found.users (users.name,users.firstname,users.username,users.email,users.passwd) values (:name,:firstname,:username,:email,:pwd)";
             $ps = $this->_db->prepare($query);
             $ps->bindValue('name', $name);
@@ -372,7 +373,7 @@
         public function addQuestion($title, $category, $subject) {
 			$user = unserialize($_SESSION['user']);
 			$request = $this->_db->prepare("INSERT INTO class_not_found.questions (title, category_id, subject, creation_date, user_id) VALUES (:title, :cat, :subject, NOW(), :userId)");
-			$request->bindValue('title', $title, PDO::PARAM_STR);
+			$request->bindValue('title', nl2br(htmlspecialchars($title)), PDO::PARAM_STR);
 			$request->bindValue('cat', $category, PDO::PARAM_INT);
 			$request->bindValue('subject', nl2br(htmlspecialchars($subject)), PDO::PARAM_STR);
 			$request->bindValue('userId', $user->getId(), PDO::PARAM_INT);
@@ -384,5 +385,18 @@
 			$id = $request->fetch()['question_id'];
 			$request->closeCursor();
 			return (int) $id;
+        }
+        
+        public function editQuestion($id, $title, $category, $subject, $state) {
+			$request = $this->_db->prepare("UPDATE class_not_found.questions q
+					SET q.title = :title, q.subject = :subject, q.state = :state, q.category_id = :category
+					WHERE q.question_id = :questionId");
+			$request->bindValue('title', nl2br(htmlspecialchars($title)), PDO::PARAM_STR);
+			$request->bindValue('subject', nl2br(htmlspecialchars($subject)), PDO::PARAM_STR);
+			$request->bindValue('state', $state, PDO::PARAM_STR_CHAR);
+			$request->bindValue('category', $category, PDO::PARAM_INT);
+			$request->bindValue('questionId', $id, PDO::PARAM_INT);
+			$request->execute();
+			$request->closeCursor();
         }
 	}

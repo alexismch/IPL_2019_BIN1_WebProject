@@ -7,7 +7,7 @@
 		
 		public function __construct($global) {
 			$this->_global = $global;
-
+			
 			if (isset($_POST['duplicate'])) {
 				$refererId = $_POST['refererId'];
 				if ($this->_global['db']->setDuplicated($_GET['id'], $refererId)) {
@@ -15,13 +15,11 @@
 					header("Location: ".$_SERVER['REDIRECT_URL']);
 					exit();
 				}
-			}
-			else if (isset($_POST['delete'])){
+			} else if (isset($_POST['delete'])){
                 if($this->_global['db']->deleteQuestion($_GET['id'])){
                     $_SESSION['code'] = "S12";
                     header("Location: /");
                     exit();
-
                 }
             } else if (isset($_POST['open'])){
 			    if($this->_global['db']->setOpen($_GET['id'])){
@@ -46,6 +44,10 @@
 				} else
 					$this->_question['title'] = "Ajouter une question";
 			} else {
+				if (isset($_POST['edit-form'])) {
+					$this->_global['db']->editQuestion($_GET['id'], $_POST['title'], $_POST['category'], $_POST['subject'], $_POST['state']);
+					$_SESSION['code'] = "S15";
+				}
 				$this->_question = $this->_global['db']->getQuestion($_GET['id']);
 				$cleanTitle = $this->_global['fn']->clean($this->_question['title']);
 				if (empty($this->_question)) throw new Error("404");
@@ -65,12 +67,15 @@
 				$categories = $this->_global['db']->getCategories();
 				require_once (PATH_VIEWS."questionForm.php");
 			} else {
+				$categories = [];
 				$isOwner = false;
 				$correctAnswer = $this->_question['correct_answer_id'];
-				
 				if (isset($_SESSION['user'])) {
 					$user = unserialize($_SESSION['user']);
 					if ($this->_question['username'] === $user->getUsername()) $isOwner = true;
+					if ($isOwner) {
+						$categories = $this->_global['db']->getCategories();
+					}
 				}
 				
 				require_once (PATH_VIEWS."question.php");

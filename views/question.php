@@ -73,28 +73,44 @@
                 </div>
             <?php
         }
-        if ($isOwner) {
+        if ($isOwner && $this->_question['state'] !== 'd') {
             ?>
-                <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal fade" id="edit-modal" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h4 class="modal-title">Modifier la question</h4>
                             </div>
-                            <div class="modal-body">
-                                <form method="POST" action="/update/question/<?php echo $this->_question['question_id']?>">
-                                    <div>
-                                        <input name="title" value="<?php echo $this->_question['title']?>">
+                            <div class="modal-body edit">
+                                <form method="POST" class="edit-form" action="">
+                                    <div class="form-section">
+                                        <label for="title">Titre</label>
+                                        <input id="title" name="title" value="<?php echo $this->_question['title']?>">
                                     </div>
-                                    <div>
-                                    
+                                    <div class="form-section">
+                                        <label for="category">Catégorie</label>
+                                        <select id="category" name="category" required>
+		                                    <?php
+			                                    foreach ($categories AS $key => $value) {
+				                                    echo '<option value="'.$value['category_id'].'">'.$value['name'].'</option>';
+			                                    }
+		                                    ?>
+                                        </select>
                                     </div>
-                                    <div>
-                                        <textarea name="subject"><?php echo $this->_question['subject']?></textarea>
+                                    <div class="form-section">
+                                        <label>État</label>
+                                        <select id="state" name="state" required>
+                                            <option value="o" <?php echo ($this->_question['state'] === 'o') ? 'selected': ''?>>Ouverte</option>
+                                            <option value="s" <?php echo ($this->_question['state'] === 's') ? 'selected': ''?>>Résolue</option>
+                                        </select>
                                     </div>
-                                    <div>
-                                        <button type="submit">Modifier</button>
+                                    <div class="form-section">
+                                        <label for="subject">Question</label>
+                                        <textarea id="subject" minlength="20" name="subject"><?php echo $this->_question['subject']?></textarea>
+                                    </div>
+                                    <div id="edit-submit-section">
+                                        <button name="edit-form" type="submit">Modifier</button>
                                     </div>
                                 </form>
                             </div>
@@ -110,8 +126,8 @@
     ?>
     <h1 class="title"><?php echo $this->_question['title']?></h1>
     <?php
-        if ($isOwner) {
-	        echo '<a data-toggle="modal" data-target="#myModal" class="modify-question"><span data-toggle="tooltip" title="Modifier la question" class="glyphicon glyphicon-cog" data-placement="right"></span></a>';
+        if ($isOwner && $this->_question['state'] !== 'd') {
+	        echo '<a data-toggle="modal" data-target="#edit-modal" class="modify-question"><span data-toggle="tooltip" title="Modifier la question" class="glyphicon glyphicon-cog" data-placement="right"></span></a>';
         }
     ?>
     <h4 class="author">par <a href="/user/<?php echo $this->_question['username']?>"><?php echo $this->_question['username']?></a>... le <?php echo $this->_question['creation_date'] ?></h4>

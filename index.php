@@ -110,7 +110,7 @@
 		try {
 			return new userController($global);
 		} catch (Error $error) {
-			return pageError($global, "Utilisateur inexistant...", $error->getMessage());
+			return pageError($global, $error->getMessage(), $error->getCode());
 		}
 	}
 	
