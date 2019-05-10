@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  mar. 23 avr. 2019 à 14:24
+-- Généré le :  ven. 10 mai 2019 à 10:06
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -22,7 +22,6 @@ USE `class_not_found`;
 -- Structure de la table `answers`
 --
 
-DROP TABLE IF EXISTS `answers`;
 CREATE TABLE `answers` (
   `answer_id` int(11) NOT NULL,
   `creation_date` datetime NOT NULL,
@@ -39,7 +38,6 @@ INSERT INTO `answers` (`answer_id`, `creation_date`, `subject`, `question_id`, `
 (1, '2019-03-31 12:39:10', 'Yop, pour moi le meilleur IDE pour le C, c\'est CodeBlocks, certes très simple mais il fait l\'affaire.', 4, 2),
 (2, '2019-03-31 18:22:02', 'Salut, je ne suis pas du tout d\'accord avec @decrombrugghe... CodeBlocks n\'est pas très efficace ! \r\nMoi je conseille dans tous les cas la suite JetBrains... pour toi ce sera alors CLion.', 4, 3),
 (3, '2019-03-21 02:25:45', 'Ils ont juste beaucoup d\'argent.', 5, 3),
-(4, '2019-03-28 03:29:04', 'Il te suffit de faire une requête SQL qui va récupérer toutes les données et après tu fais une boucle pour les parcourir et tu les affiches dans les balises HTML.', 2, 3),
 (5, '2019-03-26 13:31:12', 'Essaie avec Unity.', 3, 3),
 (6, '2019-04-10 15:06:53', 'Une boucle sert à répéter la même action plusieurs fois en fonction de ce qui est demandé.\r\nTu as le for qui tourne un certain nombre de fois défini alors que le while, lui, tourne tant qu\'une condition est remplie.', 1, 1);
 
@@ -49,7 +47,6 @@ INSERT INTO `answers` (`answer_id`, `creation_date`, `subject`, `question_id`, `
 -- Structure de la table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `category_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -74,7 +71,6 @@ INSERT INTO `categories` (`category_id`, `name`, `link_referer`) VALUES
 -- Structure de la table `questions`
 --
 
-DROP TABLE IF EXISTS `questions`;
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -92,10 +88,9 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`question_id`, `title`, `category_id`, `subject`, `creation_date`, `state`, `user_id`, `referer_question_id`, `correct_answer_id`) VALUES
-(1, 'Comment faire une boucle ?', 2, 'Bonjour,\r\nJe suis débutant, et j\'ai entendu parler des boucles for, while,... \r\nQu\'est-ce ? Et comment puis-je en faire ? \r\nMerci', '2019-03-28 12:11:17', 'o', 2, NULL, NULL),
-(2, 'Afficher des infos depuis la db', 6, 'Bonjour,\r\nJ\'ai une base de donnée (db) et j\'aimerais avoir la possibilité d\'aller chercher ces infos et les mettre dans un tableau html... Comment faire ça ? \r\nJ\'utilise PHP, merci.', '2019-03-27 17:24:05', 'o', 2, NULL, NULL),
+(1, 'Comment faire une boucle ?', 2, 'Bonjour,\r\nJe suis débutant, et j\'ai entendu parler des boucles for, while,... \r\nQu\'est-ce ? Et comment puis-je en faire ? \r\nMerci', '2019-03-28 12:11:17', 'd', 2, 1, NULL),
 (3, 'Jeu 3D en Java', 5, 'Bonjour,\r\nJe suis actuellement étudiant et j\'ai vu du Java.\r\nTrès simple à mon gout... c\'est pourquoi j\'aimerais me lancer dans la création d\'un jeu 3D en Java. \r\nQuels outils me conseillez-vous ? \r\nMerci', '2019-03-26 02:21:17', 'o', 1, NULL, NULL),
-(4, 'Le meilleur IDE', 1, 'Bonjour,\r\nUtilisant Notepadd++ pour développer en C, je compile tout via le Terminal de mon Mac.\r\nCependant, ça devient du travail pour rien... je cherche donc un IDE simple et efficace, que me conseillez-vous ?', '2019-03-31 11:36:52', 'o', 1, NULL, 2),
+(4, 'Le meilleur IDE', 1, 'Bonjour,\r\nUtilisant Notepadd++ pour développer en C, je compile tout via le Terminal de mon Mac.\r\nCependant, ça devient du travail pour rien... je cherche donc un IDE simple et efficace, que me conseillez-vous ?', '2019-03-31 11:36:52', 's', 1, NULL, 2),
 (5, 'Facebook et leurs données', 4, 'Bonjour,\r\nJ\'ai découvert que Facebook est l\'un des sites ayant le + de données stockées... \r\nUne question me vint alors à l\'esprit : comment font-ils pour avoir tant de données et pourtant avoir une vitesse d\'exécution hors-normes ?', '2019-03-20 09:51:59', 'o', 2, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -104,7 +99,6 @@ INSERT INTO `questions` (`question_id`, `title`, `category_id`, `subject`, `crea
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -131,7 +125,6 @@ INSERT INTO `users` (`user_id`, `name`, `firstname`, `username`, `email`, `passw
 -- Structure de la table `votes`
 --
 
-DROP TABLE IF EXISTS `votes`;
 CREATE TABLE `votes` (
   `user_id` int(11) NOT NULL,
   `answer_id` int(11) NOT NULL,
@@ -145,7 +138,8 @@ CREATE TABLE `votes` (
 INSERT INTO `votes` (`user_id`, `answer_id`, `value`) VALUES
 (1, 1, -1),
 (1, 2, 1),
-(2, 2, 1);
+(2, 2, 1),
+(1, 6, 0);
 
 --
 -- Index pour les tables déchargées
