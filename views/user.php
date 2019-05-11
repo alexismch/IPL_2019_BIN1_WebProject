@@ -1,26 +1,5 @@
 <div class="user">
-    <div class="test">
-    <?php if(!empty($_SESSION['isConnected'])&&$_SESSION['isAdmin']&& $this->_user->getId()!=unserialize($_SESSION['user'])->getId()){?>
-        <form action="?action=suspendre"  class="boutton" method="POST">
-            <?php if($this->_user->isLocked()==0){ ?>
-                <input type="hidden" id="suspendre" name="suspendre" value="Suspendre">
-                <input type="submit" class="btn btn-info" value="suspendre">
-            <?php }else{ ?>
-                <input type="hidden" id="enLigne" name="enLigne" value="enLigne">
-                <input type="submit" class="btn btn-info" value="enLigne">
-            <?php }?>
-        </form>
-        <form action="?action=Admin" class="boutton" method="POST" >
-            <?php if($this->_user->isAdmin()==0){ ?>
-                <input type="hidden" id="admin" name="Admin" value="admin">
-                <input type="submit" class="btn btn-info" value="   Admin    ">
-            <?php }else{ ?>
-                <input type="hidden" id="Membre" name="Membre" value="Membre">
-                <input type="submit" class="btn btn-info" value="   Membre    ">
-            <?php }?>
-        </form>
-    <?php }?>
-    </div>
+
     <h2>fiche de: <?php echo $this->_user->getUsername(); ?></h2>
     <p>
         <table class="table table-bordered">
