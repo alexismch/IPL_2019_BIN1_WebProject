@@ -19,7 +19,7 @@
 		        <?php
 			        if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
 				        $user = unserialize($_SESSION['user']);
-				        echo '<a href="/logout">Déconnexion</a><span class="connected-user">'.$user->getUsername().'</span>';
+				        echo '<a href="/logout">Déconnexion</a><span class="connected-user"><a class="btn btn-link btn-xs" href="/user/' . $user->getUsername() . '">'.$user->getUsername().'</a></span>';
 			        }
 			        else echo '<a href="/login">Connexion</a>';
 		        ?>

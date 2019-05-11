@@ -30,19 +30,22 @@
 		
 		public function run() {
             if($_GET['username'] === "all"){
+                $currentUser=unserialize($_SESSION['user']);
 
                 if(!empty($_POST['setAdmin'])&&$this->_global['db']->setAdmin($_POST['setAdmin'],1)) {
                     $_SESSION['code'] = "S8";
                     header("Location: /user/all");
                 }
-                if(!empty($_POST['setMember'])&&$this->_global['db']->setAdmin($_POST['setMember'],0)) {
+                if(!empty($_POST['setMember'])&&$currentUser->getId()!=$_POST['setMember']&&$this->_global['db']->setAdmin($_POST['setMember'],0)) {
                     $_SESSION['code'] = "S10";
                     header("Location: /user/all");
                 }
-                if(!empty($_POST['setLocked'])&&$this->_global['db']->setLocked($_POST['setLocked'],1)) {
+                elseif (!empty($_POST['setMember'])&&$currentUser->getId()===$_POST['setMember']) $_SESSION['code']="E8";
+                if(!empty($_POST['setLocked'])&&$currentUser->getId()!=$_POST['setLocked']&&$this->_global['db']->setLocked($_POST['setLocked'],1)) {
                     $_SESSION['code'] = "S7";
                     header("Location: /user/all");
                 }
+                elseif (!empty($_POST['setLocked'])&&$currentUser->getId()===$_POST['setLocked']) $_SESSION['code']="E8";
                 if(!empty($_POST['setOnLine'])&&$this->_global['db']->setLocked($_POST['setOnLine'],0)) {
 
                     $_SESSION['code'] = "S9";
@@ -56,5 +59,8 @@
 	            require_once (PATH_VIEWS."user.php");
             }
 		}
+		public function getCategoryById ($question){
+		    return $this->_global['db']->getCategoryById($question['category_id']);
+        }
 
 	}
