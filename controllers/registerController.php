@@ -4,7 +4,7 @@
 		
 		public function __construct($global) {
 			$this->_global = $global;
-			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {#a member woh is connected cannot create an account
 				$_SESSION['code'] = "E0";
 				header("Location: /");
 				exit();
@@ -17,7 +17,7 @@
          */
         public function run(){
         	if (isset($_POST['register'])) {
-		        if (!isset($_POST['name']) || empty($_POST['name']))
+		        if (!isset($_POST['name']) || empty($_POST['name']))#check if the name field is not empty
 		        	$errorMessage = "Veuillez saisir un nom...";
 		        else if (!isset($_POST['firstname']) || empty($_POST['firstname']))
 		        	$errorMessage = "Veuillez saisir un prénom...";

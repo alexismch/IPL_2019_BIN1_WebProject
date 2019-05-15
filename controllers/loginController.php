@@ -4,7 +4,7 @@
 		
 		public function __construct($global) {
 			$this->_global = $global;
-			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {
+			if (isset($_SESSION['isConnected']) && $_SESSION['isConnected']) {#a member who's already connected can not login a second time
 				$_SESSION['code'] = "E0";
 				header("Location: /");
 				exit();
@@ -15,7 +15,7 @@
 	    public function run(){
 			if (isset($_POST['login'])) {
 				$user = $this->_global['db']->getUser($_POST['username']);
-				if ($user != null && $user->isValidPasswd($_POST['passwd'])) {
+				if ($user != null && $user->isValidPasswd($_POST['passwd'])) {#check the password
 					if ($user->isLocked()) $errorMessage = "Votre compte est actuellement bloqué...";
 					else {
 						$_SESSION['user'] = serialize($user);

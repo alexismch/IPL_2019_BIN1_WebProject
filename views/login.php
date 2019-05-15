@@ -8,7 +8,7 @@
 ?>
 <div class="login">
     <div class="login-section">
-        <form class="login-form" method="POST">
+        <form class="login-form"  method="POST">
             <h2>Se connecter</h2>
             <div class="form-section" id="username-section">
                 <input type="text" name="username" id="username" autocomplete="off" required>

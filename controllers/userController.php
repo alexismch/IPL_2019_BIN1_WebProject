@@ -4,16 +4,12 @@
 		private $_user;
 		private $_questions;
         private $_allUsers;
-#
-#
-#on ne peux pas mettre Son compte en tant que membre
-#
-#
+
 		public function __construct($global) {
 			$this->_global = $global;
 
 			if ($_GET['username'] === "all") {
-				if (!isset($_SESSION['isConnected']) || !$_SESSION['isConnected'] || !$_SESSION['isAdmin']) {
+				if (!isset($_SESSION['isConnected']) || !$_SESSION['isConnected'] || !$_SESSION['isAdmin']) {#if the user is not an Admin or not connected he doesn't have access
 					throw new Error("Vous n'avez pas accès à cette page...","403");
 				}
 				$this->_allUsers = $this->_global['db']->getAllUsers();
@@ -30,9 +26,9 @@
 		
 		public function run() {
             if($_GET['username'] === "all"){
-                $currentUser=unserialize($_SESSION['user']);
+                $currentUser=unserialize($_SESSION['user']);#unserialize($_SESSION['user']) return an object of user type
 
-                if(!empty($_POST['setAdmin'])&&$this->_global['db']->setAdmin($_POST['setAdmin'],1)) {
+                if(!empty($_POST['setAdmin'])&&$this->_global['db']->setAdmin($_POST['setAdmin'],1)) {#only admins have access to users
                     $_SESSION['code'] = "S8";
                     header("Location: /user/all");
                 }
@@ -59,6 +55,9 @@
 	            require_once (PATH_VIEWS."user.php");
             }
 		}
+		#
+        #takes as parameter a question
+        #return the category of that question.
 		public function getCategoryById ($question){
 		    return $this->_global['db']->getCategoryById($question['category_id']);
         }
